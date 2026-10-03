@@ -94,25 +94,25 @@ function App() {
 
           {/* Featured Section */}
           {(() => {
-            const featuredProject = GITHUB_REPOS.find(repo => repo.name === 'nixharness');
-            if (!featuredProject) return null;
+            const featuredItem = MEDIUM_POSTS.find(post => post.title === 'Build a Gemini Agent Harness from Scratch with Nix-Shell Sandbox');
+            if (!featuredItem) return null;
             return (
               <div className="featured-section animate-slide-up" style={{ animationDelay: '0.2s' }}>
-                <h3 className="featured-title">Featured Highlights</h3>
+                <h3 className="featured-title">Featured Highlight</h3>
                 <div 
                   className="featured-card glass-panel" 
-                  onClick={() => openFile(featuredProject.name, 'project', featuredProject.name, featuredProject)}
+                  onClick={() => openFile('featured-blog', 'blog', featuredItem.title, featuredItem)}
                 >
-                  {featuredProject.image && (
+                  {featuredItem.image && (
                     <div className="featured-image">
-                      <img src={`/images/${featuredProject.image}`} alt={featuredProject.name} />
+                      <img src={`/images/${featuredItem.image}`} alt={featuredItem.title} />
                     </div>
                   )}
                   <div className="featured-content">
-                    <h4>{featuredProject.name}</h4>
-                    <p>{featuredProject.description}</p>
+                    <h4>{featuredItem.title}</h4>
+                    <p>{featuredItem.excerpt}</p>
                     <div className="featured-tags">
-                      {featuredProject.tags.slice(0, 3).map(tag => (
+                      {featuredItem.tags.slice(0, 3).map(tag => (
                         <span key={tag} className="modern-tag mini">{tag}</span>
                       ))}
                     </div>
@@ -136,7 +136,7 @@ function App() {
               </div>
             )}
             <div className="detail-header">
-              <h2>{activeFile.title}</h2>
+              <h2>{activeFile.data.title || activeFile.data.name}</h2>
               <a href={activeFile.data.link} target="_blank" rel="noopener noreferrer" className="action-btn primary-btn">
                 {isBlog ? 'Read Full Article' : 'View Source'} <ExternalLink size={16} />
               </a>
@@ -197,7 +197,7 @@ function App() {
               {expandedDirs.projects && (
                 <ul className="tree-children">
                   {GITHUB_REPOS.map(repo => (
-                    <li key={repo.name} className={`tree-node ${activeFile?.id === repo.name ? 'active-node' : ''}`} onClick={() => openFile(repo.name, 'project', repo.name, repo)}>
+                    <li key={repo.name} className={`tree-node ${activeFile?.id === repo.name ? 'active-node' : ''}`} onClick={() => openFile(repo.name, 'project', repo.name, repo)} title={repo.name}>
                       <span className="file-icon-mini">{getFileIcon(repo.tags)}</span> <span className="file-label">{repo.name}</span>
                     </li>
                   ))}
@@ -217,7 +217,7 @@ function App() {
                   {MEDIUM_POSTS.map((post, i) => {
                     const shortName = post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title;
                     return (
-                      <li key={i} className={`tree-node ${activeFile?.id === `blog-${i}` ? 'active-node' : ''}`} onClick={() => openFile(`blog-${i}`, 'blog', shortName, post)}>
+                      <li key={i} className={`tree-node ${activeFile?.id === `blog-${i}` ? 'active-node' : ''}`} onClick={() => openFile(`blog-${i}`, 'blog', shortName, post)} title={post.title}>
                         <FileText size={14} style={{color: '#519aba'}}/> <span className="file-label">{shortName}</span>
                       </li>
                     );
