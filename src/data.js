@@ -5,7 +5,7 @@ export const PROFILE = {
   links: {
     github: "https://github.com/abhijitdc",
     medium: "https://medium.com/@abhisaxj",
-    linkedin: "https://linkedin.com/in/abhijitdc",
+    linkedin: "https://www.linkedin.com/in/abhi-chowdhury",
     twitter: "https://twitter.com/abhisaxj"
   }
 };
