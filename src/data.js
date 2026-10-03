@@ -76,9 +76,8 @@ export const MEDIUM_POSTS = [
 export const GITHUB_REPOS = [
   {
     "name": "bigquery-infoschema-agent",
-    "description": "",
+    "description": "This project implements a conversational AI agent built to interact with and answer questions about Google BigQuery's INFORMATION_SCHEMA. It leverages Google's Agent Development Kit (ADK) and can be configured to use Vertex AI for persistent session management.",
     "link": "https://github.com/abhijitdc/bigquery-infoschema-agent",
-    "stars": 0,
     "tags": [
       "Python"
     ],
@@ -87,9 +86,8 @@ export const GITHUB_REPOS = [
   },
   {
     "name": "bq_mcp_agent",
-    "description": "",
+    "description": "A Model Context Protocol (MCP) server integration for Google BigQuery. This agent facilitates seamless AI access to BigQuery resources via standard MCP tool calls.",
     "link": "https://github.com/abhijitdc/bq_mcp_agent",
-    "stars": 0,
     "tags": [
       "Python"
     ],
@@ -98,9 +96,8 @@ export const GITHUB_REPOS = [
   },
   {
     "name": "gemini_enterprise_adk_sales_agent",
-    "description": "",
+    "description": "An AI-powered sales assistant built using the Google Agent Development Kit (ADK) and Gemini Enterprise. It securely interacts with enterprise data to support advanced sales workflows.",
     "link": "https://github.com/abhijitdc/gemini_enterprise_adk_sales_agent",
-    "stars": 0,
     "tags": [
       "Python"
     ],
@@ -109,9 +106,8 @@ export const GITHUB_REPOS = [
   },
   {
     "name": "graphrag_with_bigquery",
-    "description": "",
+    "description": "A Jupyter Notebook codelab demonstrating how to implement GraphRAG (Graph Retrieval-Augmented Generation) using Google BigQuery and graph databases for advanced knowledge retrieval.",
     "link": "https://github.com/abhijitdc/graphrag_with_bigquery",
-    "stars": 0,
     "tags": [
       "Jupyter Notebook"
     ],
@@ -120,9 +116,8 @@ export const GITHUB_REPOS = [
   },
   {
     "name": "llm-rag-react-app",
-    "description": "",
+    "description": "A full-stack application showcasing a modern architecture with React, Flask, Langchain, and Firebase Auth. It integrates with Vertex AI and Gemini to deliver a secure RAG-powered experience.",
     "link": "https://github.com/abhijitdc/llm-rag-react-app",
-    "stars": 0,
     "tags": [
       "TypeScript"
     ],
@@ -131,9 +126,8 @@ export const GITHUB_REPOS = [
   },
   {
     "name": "nixharness",
-    "description": "",
+    "description": "A sandbox environment using Nix-shell designed for building and testing Gemini agent harnesses from scratch. It provides an isolated, reproducible execution loop for advanced AI development.",
     "link": "https://github.com/abhijitdc/nixharness",
-    "stars": 0,
     "tags": [
       "Python"
     ],
@@ -142,9 +136,8 @@ export const GITHUB_REPOS = [
   },
   {
     "name": "terraform-bigquery-streaming-demo",
-    "description": "",
+    "description": "Infrastructure as Code (IaC) setup using Terraform to provision BigQuery streaming architectures. It demonstrates best practices for deploying real-time data pipelines on Google Cloud Platform.",
     "link": "https://github.com/abhijitdc/terraform-bigquery-streaming-demo",
-    "stars": 0,
     "tags": [
       "HCL"
     ],
@@ -153,9 +146,8 @@ export const GITHUB_REPOS = [
   },
   {
     "name": "vertexai-rag-app",
-    "description": "",
+    "description": "An implementation of Retrieval-Augmented Generation (RAG) using Google Cloud Vertex AI and Python. It showcases how to integrate foundation models with vector search for enterprise AI applications.",
     "link": "https://github.com/abhijitdc/vertexai-rag-app",
-    "stars": 0,
     "tags": [
       "Python"
     ],

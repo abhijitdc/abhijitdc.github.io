@@ -91,6 +91,36 @@ function App() {
               <FaTwitter size={20} /> <span>Twitter</span>
             </a>
           </div>
+
+          {/* Featured Section */}
+          {(() => {
+            const featuredProject = GITHUB_REPOS.find(repo => repo.name === 'nixharness');
+            if (!featuredProject) return null;
+            return (
+              <div className="featured-section animate-slide-up" style={{ animationDelay: '0.2s' }}>
+                <h3 className="featured-title">Featured Highlights</h3>
+                <div 
+                  className="featured-card glass-panel" 
+                  onClick={() => openFile(featuredProject.name, 'project', featuredProject.name, featuredProject)}
+                >
+                  {featuredProject.image && (
+                    <div className="featured-image">
+                      <img src={`/images/${featuredProject.image}`} alt={featuredProject.name} />
+                    </div>
+                  )}
+                  <div className="featured-content">
+                    <h4>{featuredProject.name}</h4>
+                    <p>{featuredProject.description}</p>
+                    <div className="featured-tags">
+                      {featuredProject.tags.slice(0, 3).map(tag => (
+                        <span key={tag} className="modern-tag mini">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       );
     }
@@ -116,10 +146,7 @@ function App() {
               {isBlog ? (
                 <span className="meta-item">📅 Published: {new Date(activeFile.data.date).toLocaleDateString()}</span>
               ) : (
-                <>
-                  <span className="meta-item">⭐ {activeFile.data.stars} stars</span>
-                  <span className="meta-item">🕒 Updated: {new Date(activeFile.data.updated_at).toLocaleDateString()}</span>
-                </>
+                <span className="meta-item">🕒 Updated: {new Date(activeFile.data.updated_at).toLocaleDateString()}</span>
               )}
             </div>
 
