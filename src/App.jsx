@@ -3,7 +3,7 @@ import { Folder, FolderOpen, FileText, ChevronRight, ChevronDown, Code, Terminal
 import { FaPython, FaReact, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { SiGooglecloud, SiTerraform, SiTypescript } from 'react-icons/si';
 import { PROFILE, MEDIUM_POSTS, GITHUB_REPOS } from './data';
-import profileImage from './assets/images/profile.jpeg';
+import profileImage from './assets/images/github_avatar.png';
 
 const getFileIcon = (tags = []) => {
   const tagStr = tags.join(' ').toLowerCase();

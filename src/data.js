@@ -1,7 +1,7 @@
 export const PROFILE = {
   name: "Abhijit",
-  title: "Software Engineer",
-  bio: "I am a Software Engineer passionate about building scalable, secure, and intelligent systems. I specialize in cloud technologies, data engineering, and AI integrations, constantly exploring new ways to solve complex problems.",
+  title: "Artificially Intelligent Builder",
+  bio: "There has never been a more exciting time to be in tech. It's a thrill to keep learning and witnessing this seismic shift, even with an anxious and contradicting mind. The future is exciting, scary, and coming fast, all at the same time.",
   links: {
     github: "https://github.com/abhijitdc",
     medium: "https://medium.com/@abhisaxj",
