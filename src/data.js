@@ -1,7 +1,7 @@
 export const PROFILE = {
   name: "Abhijit",
   title: "Artificially Intelligent Builder",
-  bio: "There has never been a more exciting time to be in tech. It's a thrill to keep learning and witnessing this seismic shift, even with an anxious and contradicting mind. The future is exciting and coming fast, all at the same time.",
+  bio: "There has never been a more exciting time to be in tech. It's a thrill to keep learning and witnessing this seismic shift, even with an anxious and contradicting mind. The future is exciting and coming fast.",
   links: {
     github: "https://github.com/abhijitdc",
     medium: "https://medium.com/@abhisaxj",
