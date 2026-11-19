@@ -20,6 +20,7 @@ import { FaPython, FaReact, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/
 import { SiGooglecloud, SiTerraform, SiTypescript } from 'react-icons/si';
 import { PROFILE, MEDIUM_POSTS, GITHUB_REPOS } from './data';
 import profileImage from './assets/images/github_avatar.png';
+import CareerArc from './CareerArc';
 
 const getFileIcon = (tags = []) => {
   const tagStr = tags.join(' ').toLowerCase();
@@ -354,6 +355,8 @@ blog/
               <FaTwitter size={20} /> <span>Twitter</span>
             </a>
           </div>
+
+          <CareerArc />
 
           {(() => {
             const featuredItem = MEDIUM_POSTS.find(post => post.title === 'Build a Gemini Agent Harness from Scratch with Nix-Shell Sandbox');
