@@ -1236,6 +1236,7 @@ body {
   min-width: 800px; /* Prevent SVG from collapsing entirely on ultra-narrow screens, maintaining readability */
   height: auto;
   display: block;
+  overflow: visible; /* Prevent any label clipping at the SVG boundaries */
 }
 
 /* Background Geo bands */
@@ -1320,12 +1321,15 @@ body {
 
 /* Detail Card Info Panel */
 .career-arc-detail-card {
-  background-color: #252526;
+  background-color: var(--bg-dark);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 16px 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   margin-top: 10px;
+}
+.dark-theme .career-arc-detail-card {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 .detail-card-header {
   display: flex;
@@ -1341,7 +1345,7 @@ body {
   gap: 8px;
   font-weight: 600;
   font-size: 1.1rem;
-  color: #fff;
+  color: var(--text-primary);
 }
 .card-icon {
   color: var(--accent-blue);
@@ -1349,12 +1353,12 @@ body {
 .detail-location-badge {
   display: inline-flex;
   align-items: center;
-  background-color: #1e1e1e;
+  background-color: var(--bg-sidebar);
   border: 1px solid var(--border-color);
   padding: 3px 8px;
   border-radius: 4px;
   font-size: 0.75rem;
-  color: #ccc;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 .detail-timeframe {
