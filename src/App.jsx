@@ -427,7 +427,7 @@ blog/
               <Code size={18} style={{ color: 'var(--accent-blue)' }} /> 1. AI Platforms & Agentic Architectures
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5', marginBottom: '15px' }}>
-              Leading-edge expertise in building multi-agent workflows, model evaluation, and inference optimization frameworks. Currently driving advanced AI platform adoption at Google Cloud for strategic startups and AI-native accounts.
+              Leading-edge expertise in building multi-agent workflows, model evaluation, and inference optimization frameworks. Deep hands-on experience designing robust generative AI platform strategies, agentic systems, and high-performance inference pipelines.
             </p>
             <div className="readme-specs-grid" style={{ marginBottom: '30px' }}>
               <div className="spec-item">
@@ -463,7 +463,7 @@ blog/
               <BookOpen size={18} style={{ color: 'var(--accent-blue)' }} /> 3. Data Engineering & Distributed Systems
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5', marginBottom: '15px' }}>
-              Extensive background designing greenfield AWS/MapR data lakes, distributed real-time telemetry platforms, and Master Data Management (MDM) integrations at enterprise scale.
+              Extensive background designing greenfield cloud data lakes, distributed real-time telemetry platforms, and Master Data Management (MDM) integrations at enterprise scale.
             </p>
             <div className="readme-specs-grid" style={{ marginBottom: '30px' }}>
               <div className="spec-item">
@@ -490,7 +490,7 @@ blog/
               </div>
               <div className="spec-item">
                 <div className="spec-label">Industry & Domains</div>
-                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Banking & Financial Services (National Australia Bank, Amex, JPMorgan Chase, Macquarie Bank), Media/Streaming Products (Kayo Sports), Enterprise Cloud Platforms</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Banking & Financial Services, Media, Entertainment & Subscription Streaming, and Enterprise Cloud Platforms</div>
               </div>
             </div>
 
