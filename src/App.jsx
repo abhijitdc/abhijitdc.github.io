@@ -177,19 +177,27 @@ function App() {
 
   const toggleDir = (dir) => setExpandedDirs(prev => ({ ...prev, [dir]: !prev[dir] }));
 
-  // Dynamic file opener
+  // Dynamic file opener (Single active auxiliary tab design)
   const openFile = (id, type, title, data) => {
-    // Check if tab is already open
-    const isAlreadyOpen = openTabs.some(tab => tab.id === id);
-    if (!isAlreadyOpen) {
-      setOpenTabs(prev => [...prev, { id, type, title, data }]);
+    if (id === 'about.md') {
+      setActiveFileId('about.md');
+      return;
     }
+    
+    // For any other file, always keep 'about.md' open and replace any other open auxiliary tabs with this new one
+    setOpenTabs([
+      { id: 'about.md', type: 'about', title: 'about.md', data: null },
+      { id, type, title, data }
+    ]);
     setActiveFileId(id);
   };
 
   const closeTab = (id, e) => {
     e.stopPropagation(); // prevent setting active tab while closing
     
+    // Prevent closing about.md as it must always be present
+    if (id === 'about.md') return;
+
     // Find index of tab to close
     const tabIndex = openTabs.findIndex(tab => tab.id === id);
     if (tabIndex === -1) return;
@@ -200,11 +208,11 @@ function App() {
     // If closing the currently active tab
     if (activeFileId === id) {
       if (updatedTabs.length > 0) {
-        // Switch to adjacent tab
+        // Switch to adjacent tab (which will always be about.md)
         const nextActiveIndex = Math.min(tabIndex, updatedTabs.length - 1);
         setActiveFileId(updatedTabs[nextActiveIndex].id);
       } else {
-        // If no tabs remain, open about.md as default
+        // Fallback: open about.md as default
         setOpenTabs([{ id: 'about.md', type: 'about', title: 'about.md', data: null }]);
         setActiveFileId('about.md');
       }
