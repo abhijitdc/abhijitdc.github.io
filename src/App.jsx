@@ -147,7 +147,7 @@ function App() {
   }, [theme]);
 
   const [activeSidebar, setActiveSidebar] = useState('explorer'); // 'explorer' | 'search' | 'extensions'
-  const [expandedDirs, setExpandedDirs] = useState({ projects: true, blog: true });
+  const [expandedDirs, setExpandedDirs] = useState({ projects: false, blog: false });
   
   // State for tabs
   const [openTabs, setOpenTabs] = useState([
