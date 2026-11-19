@@ -4,7 +4,7 @@
   --bg-sidebar: #e8e8e8;
   --bg-workspace: #ffffff;
   --text-primary: #1e1e1e;
-  --text-secondary: #5f6368;
+  --text-secondary: #475569; /* Much darker Slate-600 for outstanding readability & contrast */
   --accent-blue: #0969da;
   --accent-warm: #b45309; /* Deep Amber for Leadership */
   --accent-cool: #0284c7; /* Deep Sky Blue for IC */
@@ -19,6 +19,9 @@
   --terminal-bg: #f8f9fa;
   --country-band-fill: rgba(0, 0, 0, 0.012);
   --country-band-active: rgba(0, 0, 0, 0.035);
+  --highlight-color: #6d28d9; /* Deep rich purple */
+  --highlight-bg: rgba(109, 40, 217, 0.06);
+  --highlight-border: rgba(109, 40, 217, 0.15);
 }
 
 .dark-theme {
@@ -42,6 +45,9 @@
   --terminal-bg: #0d0d0d;
   --country-band-fill: rgba(255, 255, 255, 0.012);
   --country-band-active: rgba(255, 255, 255, 0.035);
+  --highlight-color: #a78bfa; /* Bright lavender/purple */
+  --highlight-bg: rgba(167, 139, 250, 0.08);
+  --highlight-border: rgba(167, 139, 250, 0.15);
 }
 
 * {
@@ -1520,17 +1526,18 @@ body {
 .highlight-tag {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #a78bfa; /* beautiful light purple matching advisory */
+  color: var(--highlight-color);
   letter-spacing: 0.5px;
-  background-color: rgba(167, 139, 250, 0.08);
-  border: 1px solid rgba(167, 139, 250, 0.15);
+  background-color: var(--highlight-bg);
+  border: 1px solid var(--highlight-border);
   padding: 3px 8px;
   border-radius: 4px;
   font-family: 'Geist', sans-serif;
   text-transform: uppercase;
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
 }
 .highlight-separator {
-  color: #444;
+  color: var(--text-secondary);
   font-size: 0.8rem;
 }
 
