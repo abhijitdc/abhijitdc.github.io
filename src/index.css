@@ -1465,3 +1465,28 @@ body {
     width: 100%;
   }
 }
+
+/* Career Arc Highlights sub-row */
+.career-arc-highlights {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.highlight-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a78bfa; /* beautiful light purple matching advisory */
+  letter-spacing: 0.5px;
+  background-color: rgba(167, 139, 250, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: 'Geist', sans-serif;
+  text-transform: uppercase;
+}
+.highlight-separator {
+  color: #444;
+  font-size: 0.8rem;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Award, Briefcase, MapPin } from 'lucide-react';
+import { Award, Briefcase, MapPin, Code } from 'lucide-react';
 
 const DATASET = {
   "roles": [
@@ -27,6 +27,25 @@ const DATASET = {
 const computeCurrentYear = () => {
   const now = new Date();
   return now.getFullYear() + (now.getMonth() + 0.5) / 12;
+};
+
+const getProgressionNote = (role) => {
+  if (role.style === 'ring') {
+    return {
+      icon: <Award size={13} style={{ marginRight: '5px', flexShrink: 0 }} />,
+      text: "Strategic advisory and system design chapter. Combines technical architect authority with broad cross-functional alignment."
+    };
+  }
+  if (role.leadPct >= 50) {
+    return {
+      icon: <Briefcase size={13} style={{ marginRight: '5px', flexShrink: 0 }} />,
+      text: "Leadership & team management chapter. Accountable for process scalability, team enablement, and high-impact delivery."
+    };
+  }
+  return {
+    icon: <Code size={13} style={{ marginRight: '5px', flexShrink: 0 }} />,
+    text: "Hands-on engineering foundation. Establishes the deep system and software knowledge that informs subsequent architecture design."
+  };
 };
 
 export default function CareerArc() {
@@ -124,6 +143,13 @@ export default function CareerArc() {
           <p className="career-arc-subtitle">
             Balancing hands-on execution, people management, and architectural leadership across 23+ years and 3 countries.
           </p>
+          <div className="career-arc-highlights">
+            <span className="highlight-tag">23+ Years Experience</span>
+            <span className="highlight-separator">•</span>
+            <span className="highlight-tag">3 Countries</span>
+            <span className="highlight-separator">•</span>
+            <span className="highlight-tag">Hands-on Technology Depth & Leadership Breadth</span>
+          </div>
         </div>
         
         {/* Legend */}
@@ -379,13 +405,16 @@ export default function CareerArc() {
             </div>
           </div>
 
-          {/* Advisory ring marker details */}
-          {activeRole.style === 'ring' && (
-            <div className="detail-advisory-hint">
-              <Award size={13} style={{ marginRight: '5px', flexShrink: 0 }} />
-              <span>Strategic Architectural Leadership & Executive Advisory Role</span>
-            </div>
-          )}
+          {/* Contextual career progression note */}
+          {(() => {
+            const note = getProgressionNote(activeRole);
+            return (
+              <div className="detail-advisory-hint animate-fade-in" key={activeRole.title}>
+                {note.icon}
+                <span>{note.text}</span>
+              </div>
+            );
+          })()}
         </div>
       )}
     </div>
