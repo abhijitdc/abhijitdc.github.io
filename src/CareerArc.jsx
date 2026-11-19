@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Award, Briefcase, MapPin } from 'lucide-react';
+import { Award, Briefcase, MapPin, Code } from 'lucide-react';
 
 const DATASET = {
   "roles": [
@@ -27,6 +27,25 @@ const DATASET = {
 const computeCurrentYear = () => {
   const now = new Date();
   return now.getFullYear() + (now.getMonth() + 0.5) / 12;
+};
+
+const getProgressionNote = (role) => {
+  if (role.style === 'ring') {
+    return {
+      icon: <Award size={13} style={{ marginRight: '5px', flexShrink: 0 }} />,
+      text: "Strategic advisory and system design chapter. Combines technical architect authority with broad cross-functional alignment."
+    };
+  }
+  if (role.leadPct >= 50) {
+    return {
+      icon: <Briefcase size={13} style={{ marginRight: '5px', flexShrink: 0 }} />,
+      text: "Leadership & team management chapter. Accountable for process scalability, team enablement, and high-impact delivery."
+    };
+  }
+  return {
+    icon: <Code size={13} style={{ marginRight: '5px', flexShrink: 0 }} />,
+    text: "Hands-on engineering foundation. Establishes the deep system and software knowledge that informs subsequent architecture design."
+  };
 };
 
 export default function CareerArc() {
@@ -124,6 +143,13 @@ export default function CareerArc() {
           <p className="career-arc-subtitle">
             Balancing hands-on execution, people management, and architectural leadership across 23+ years and 3 countries.
           </p>
+          <div className="career-arc-highlights">
+            <span className="highlight-tag">23+ Years Experience</span>
+            <span className="highlight-separator">•</span>
+            <span className="highlight-tag">3 Countries</span>
+            <span className="highlight-separator">•</span>
+            <span className="highlight-tag">Hands-on Technology Depth & Leadership Breadth</span>
+          </div>
         </div>
         
         {/* Legend */}
@@ -157,22 +183,22 @@ export default function CareerArc() {
 
             {/* Gradient for fill above 50% centerline */}
             <linearGradient id="warm-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.0" />
+              <stop offset="0%" stopColor="var(--accent-warm)" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="var(--accent-warm)" stopOpacity="0.0" />
             </linearGradient>
 
             {/* Gradient for fill below 50% centerline */}
             <linearGradient id="cool-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.0" />
-              <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="var(--accent-cool)" stopOpacity="0.0" />
+              <stop offset="100%" stopColor="var(--accent-cool)" stopOpacity="0.25" />
             </linearGradient>
 
             {/* Main Stroke Gradient */}
             <linearGradient id="stroke-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#f59e0b" />
-              <stop offset="45%" stopColor="#f59e0b" />
-              <stop offset="55%" stopColor="#38bdf8" />
-              <stop offset="100%" stopColor="#38bdf8" />
+              <stop offset="0%" stopColor="var(--accent-warm)" />
+              <stop offset="45%" stopColor="var(--accent-warm)" />
+              <stop offset="55%" stopColor="var(--accent-cool)" />
+              <stop offset="100%" stopColor="var(--accent-cool)" />
             </linearGradient>
           </defs>
 
@@ -282,7 +308,7 @@ export default function CareerArc() {
             const isActive = activeIdx === idx;
 
             const isWarm = role.leadPct >= 50;
-            const markerColor = isWarm ? '#f59e0b' : '#38bdf8';
+            const markerColor = isWarm ? 'var(--accent-warm)' : 'var(--accent-cool)';
 
             if (role.style === 'ring') {
               return (
@@ -379,13 +405,16 @@ export default function CareerArc() {
             </div>
           </div>
 
-          {/* Advisory ring marker details */}
-          {activeRole.style === 'ring' && (
-            <div className="detail-advisory-hint">
-              <Award size={13} style={{ marginRight: '5px', flexShrink: 0 }} />
-              <span>Strategic Architectural Leadership & Executive Advisory Role</span>
-            </div>
-          )}
+          {/* Contextual career progression note */}
+          {(() => {
+            const note = getProgressionNote(activeRole);
+            return (
+              <div className="detail-advisory-hint animate-fade-in" key={activeRole.title}>
+                {note.icon}
+                <span>{note.text}</span>
+              </div>
+            );
+          })()}
         </div>
       )}
     </div>

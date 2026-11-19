@@ -14,13 +14,16 @@ import {
   X,
   Search,
   Puzzle,
-  Files
+  Files,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { FaPython, FaReact, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { SiGooglecloud, SiTerraform, SiTypescript } from 'react-icons/si';
 import { PROFILE, MEDIUM_POSTS, GITHUB_REPOS } from './data';
 import profileImage from './assets/images/github_avatar.png';
 import CareerArc from './CareerArc';
+import ArchitectureMinimap from './ArchitectureMinimap';
 
 const getFileIcon = (tags = []) => {
   const tagStr = tags.join(' ').toLowerCase();
@@ -132,6 +135,17 @@ const SKILLS_EXTENSIONS = [
 ];
 
 function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+    } else {
+      document.documentElement.classList.remove('dark-theme');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   const [activeSidebar, setActiveSidebar] = useState('explorer'); // 'explorer' | 'search' | 'extensions'
   const [expandedDirs, setExpandedDirs] = useState({ projects: true, blog: true });
   
@@ -324,39 +338,49 @@ blog/
     if (activeFile.type === 'about') {
       return (
         <div className="modern-about animate-fade-in">
-          <div className="hero-section animate-slide-up">
-            <div className="hero-avatar-container">
-               <img src={profileImage} alt={PROFILE.name} className="hero-avatar" />
+          {/* Top section: Split layout placing the interactive Career Arc first */}
+          <div className="hero-split-layout animate-slide-up">
+            {/* Left Column: Profile Card & Social Links */}
+            <div className="hero-left-card glass-panel">
+              <div className="hero-avatar-container">
+                <img src={profileImage} alt={PROFILE.name} className="hero-avatar" />
+              </div>
+              <div className="hero-identity">
+                <h1 className="hero-name">{PROFILE.name}</h1>
+                <h2 className="hero-title">{PROFILE.title}</h2>
+              </div>
+              <div className="social-links inline">
+                <a href={PROFILE.links.github} target="_blank" rel="noopener noreferrer" className="social-btn github mini" title="GitHub">
+                  <FaGithub size={18} />
+                </a>
+                <a href={PROFILE.links.linkedin} target="_blank" rel="noopener noreferrer" className="social-btn linkedin mini" title="LinkedIn">
+                  <FaLinkedin size={18} />
+                </a>
+                <a href={PROFILE.links.medium} target="_blank" rel="noopener noreferrer" className="social-btn medium mini" title="Medium">
+                  <BookOpen size={18} />
+                </a>
+                <a href={PROFILE.links.twitter} target="_blank" rel="noopener noreferrer" className="social-btn twitter mini" title="Twitter/X">
+                  <FaTwitter size={18} />
+                </a>
+              </div>
             </div>
-            <div className="hero-text">
-               <h1 className="hero-name">{PROFILE.name}</h1>
-               <h2 className="hero-title">{PROFILE.title}</h2>
-               <p className="hero-bio">{PROFILE.bio}</p>
-               <div className="hero-badges">
-                 <span className="hero-badge"><SiGooglecloud style={{ color: '#4285F4' }} size={14} /> GenAI & GCP</span>
-                 <span className="hero-badge"><SiTerraform style={{ color: '#844FBA' }} size={14} /> IaC (Terraform)</span>
-                 <span className="hero-badge"><FaPython style={{ color: '#3776AB' }} size={14} /> Data Engineering</span>
-                 <span className="hero-badge"><Code size={14} style={{ color: '#61DAFB' }} /> Full-Stack RAG</span>
-               </div>
+
+            {/* Right Column: Interactive Career Arc visualization */}
+            <div className="hero-right-visual">
+              <CareerArc />
             </div>
-          </div>
-          
-          <div className="social-links animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            <a href={PROFILE.links.github} target="_blank" rel="noopener noreferrer" className="social-btn github">
-              <FaGithub size={20} /> <span>GitHub</span>
-            </a>
-            <a href={PROFILE.links.linkedin} target="_blank" rel="noopener noreferrer" className="social-btn linkedin">
-              <FaLinkedin size={20} /> <span>LinkedIn</span>
-            </a>
-            <a href={PROFILE.links.medium} target="_blank" rel="noopener noreferrer" className="social-btn medium">
-              <BookOpen size={20} /> <span>Medium</span>
-            </a>
-            <a href={PROFILE.links.twitter} target="_blank" rel="noopener noreferrer" className="social-btn twitter">
-              <FaTwitter size={20} /> <span>Twitter</span>
-            </a>
           </div>
 
-          <CareerArc />
+          {/* Below section: Bio description & competencies */}
+          <div className="hero-bio-section animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            <p className="hero-bio">{PROFILE.bio}</p>
+            <div className="hero-badges">
+              <span className="hero-badge"><SiGooglecloud style={{ color: '#4285F4' }} size={14} /> GenAI & GCP</span>
+              <span className="hero-badge"><SiTerraform style={{ color: '#844FBA' }} size={14} /> IaC (Terraform)</span>
+              <span className="hero-badge"><FaPython style={{ color: '#3776AB' }} size={14} /> Data Engineering</span>
+              <span className="hero-badge"><Code size={14} style={{ color: '#61DAFB' }} /> Full-Stack RAG</span>
+            </div>
+          </div>
 
           {(() => {
             const featuredItem = MEDIUM_POSTS.find(post => post.title === 'Build a Gemini Agent Harness from Scratch with Nix-Shell Sandbox');
@@ -455,11 +479,8 @@ blog/
           <div className="detail-card glass-panel animate-slide-up">
             <div className="readme-header-badge">📄 README.md ➔ projects/{activeFile.data.name.toLowerCase().replace(/ /g, '-')}</div>
             
-            {activeFile.data.image && (
-              <div className="detail-hero-image">
-                <img src={`/images/${activeFile.data.image}`} alt={activeFile.title} />
-              </div>
-            )}
+            {/* Procedural SVG System Architecture Minimap instead of static image */}
+            <ArchitectureMinimap file={activeFile} />
             
             <div className="detail-header">
               <h2>{activeFile.data.name}</h2>
@@ -528,11 +549,8 @@ blog/
           <div className="detail-card glass-panel animate-slide-up">
             <div className="readme-header-badge">📄 BLOG_POST.md ➔ blog/{activeFile.title}</div>
             
-            {activeFile.data.image && (
-              <div className="detail-hero-image">
-                <img src={`/images/${activeFile.data.image}`} alt={activeFile.title} />
-              </div>
-            )}
+            {/* Procedural SVG System Architecture Minimap instead of static image */}
+            <ArchitectureMinimap file={activeFile} />
             
             <div className="detail-header">
               <h2>{activeFile.data.title}</h2>
@@ -619,7 +637,14 @@ blog/
           </div>
         </div>
         <div className="activity-icons">
-          <div className="activity-icon-btn" title="Settings" onClick={() => setTerminalOpen(!terminalOpen)}>
+          <div 
+            className="activity-icon-btn" 
+            title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'} 
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          >
+            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          </div>
+          <div className="activity-icon-btn" title="Toggle Terminal" onClick={() => setTerminalOpen(!terminalOpen)}>
             <TerminalIcon size={20} />
           </div>
         </div>
