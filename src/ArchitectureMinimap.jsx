@@ -112,7 +112,7 @@ export default function ArchitectureMinimap({ file }) {
                   y1={y} 
                   x2={x2} 
                   y2={y} 
-                  stroke="rgba(255, 255, 255, 0.06)" 
+                  stroke="var(--grid-line-color)" 
                   strokeWidth="2" 
                 />
                 {/* Animated overlay flowing line */}

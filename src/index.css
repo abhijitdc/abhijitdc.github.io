@@ -1,14 +1,43 @@
 :root {
+  /* Light Mode (Default) */
+  --bg-dark: #f3f3f3;
+  --bg-sidebar: #e8e8e8;
+  --bg-workspace: #ffffff;
+  --text-primary: #1e1e1e;
+  --text-secondary: #5f6368;
+  --accent-blue: #0969da;
+  --accent-warm: #b45309; /* Deep Amber for Leadership */
+  --accent-cool: #0284c7; /* Deep Sky Blue for IC */
+  --border-color: #d0d7de;
+  --hover-bg: #dbdbdb;
+  --active-bg: #d0d0d0;
+  --icon-color: #555555;
+  --bg-node: #f8fafc;
+  --grid-line-color: rgba(0, 0, 0, 0.05);
+  --centerline-color: #666;
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --terminal-bg: #f8f9fa;
+}
+
+.dark-theme {
+  /* Dark Mode (VS Code Standard) */
   --bg-dark: #1e1e1e;
   --bg-sidebar: #252526;
   --bg-workspace: #1e1e1e;
   --text-primary: #cccccc;
   --text-secondary: #858585;
   --accent-blue: #007acc;
+  --accent-warm: #f59e0b; /* Bright Amber for Leadership */
+  --accent-cool: #38bdf8; /* Bright Sky Blue for IC */
   --border-color: #3c3c3c;
   --hover-bg: #2a2d2e;
   --active-bg: #37373d;
   --icon-color: #c5c5c5;
+  --bg-node: #181818;
+  --grid-line-color: rgba(255, 255, 255, 0.04);
+  --centerline-color: #444;
+  --bg-glass: rgba(30, 30, 30, 0.4);
+  --terminal-bg: #0d0d0d;
 }
 
 * {
@@ -154,7 +183,7 @@ body {
   display: flex;
   align-items: center;
   padding: 10px 15px;
-  background-color: #2d2d2d;
+  background-color: var(--bg-sidebar);
   border-bottom: 1px solid var(--border-color);
   font-size: 0.85rem;
   color: var(--text-secondary);
@@ -171,7 +200,7 @@ body {
 }
 
 .crumb.active {
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -383,20 +412,22 @@ body {
 }
 
 .detail-card {
-  background-color: #252526;
+  background-color: var(--bg-sidebar);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 40px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .glass-panel {
-  background: rgba(30, 30, 30, 0.4);
+  background: var(--bg-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
-  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: background 0.3s, border-color 0.3s;
+}
+.dark-theme .glass-panel {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
@@ -504,12 +535,15 @@ body {
 
 /* Terminal Drawer */
 .terminal-drawer {
-  background-color: #0d0d0d;
+  background-color: var(--terminal-bg);
   border-top: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+}
+.dark-theme .terminal-drawer {
   box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
 }
 
@@ -519,7 +553,7 @@ body {
 
 .terminal-drawer.closed {
   height: 40px;
-  background-color: #000;
+  background-color: var(--bg-sidebar);
   cursor: pointer;
 }
 
@@ -531,14 +565,14 @@ body {
   height: 40px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
   cursor: pointer;
   letter-spacing: 0.5px;
   background-color: transparent;
   transition: background-color 0.2s;
 }
 .terminal-drawer.closed .terminal-header:hover {
-  background-color: #1a1a1a;
+  background-color: var(--hover-bg);
   color: var(--accent-blue);
 }
 
@@ -552,16 +586,16 @@ body {
   align-items: center;
   font-family: 'Geist Mono', 'Consolas', 'Courier New', monospace;
   font-weight: normal;
-  color: #9cdcfe; /* Vscode-like subtle blue */
+  color: var(--accent-blue);
 }
 
 .term-actions {
   display: flex;
   align-items: center;
-  color: #888;
+  color: var(--text-secondary);
 }
 .terminal-header:hover .term-actions {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .terminal-body {
@@ -570,8 +604,8 @@ body {
   overflow-y: auto;
   font-family: 'Geist Mono', 'Consolas', 'Courier New', monospace;
   font-size: 0.9rem;
-  color: #e6e6e6;
-  background-color: #0d0d0d;
+  color: var(--text-primary);
+  background-color: var(--terminal-bg);
 }
 
 .term-line {

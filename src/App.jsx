@@ -14,7 +14,9 @@ import {
   X,
   Search,
   Puzzle,
-  Files
+  Files,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { FaPython, FaReact, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { SiGooglecloud, SiTerraform, SiTypescript } from 'react-icons/si';
@@ -133,6 +135,17 @@ const SKILLS_EXTENSIONS = [
 ];
 
 function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+    } else {
+      document.documentElement.classList.remove('dark-theme');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   const [activeSidebar, setActiveSidebar] = useState('explorer'); // 'explorer' | 'search' | 'extensions'
   const [expandedDirs, setExpandedDirs] = useState({ projects: true, blog: true });
   
@@ -624,7 +637,14 @@ blog/
           </div>
         </div>
         <div className="activity-icons">
-          <div className="activity-icon-btn" title="Settings" onClick={() => setTerminalOpen(!terminalOpen)}>
+          <div 
+            className="activity-icon-btn" 
+            title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'} 
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          >
+            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          </div>
+          <div className="activity-icon-btn" title="Toggle Terminal" onClick={() => setTerminalOpen(!terminalOpen)}>
             <TerminalIcon size={20} />
           </div>
         </div>

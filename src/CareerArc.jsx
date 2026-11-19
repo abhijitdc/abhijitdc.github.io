@@ -183,22 +183,22 @@ export default function CareerArc() {
 
             {/* Gradient for fill above 50% centerline */}
             <linearGradient id="warm-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.0" />
+              <stop offset="0%" stopColor="var(--accent-warm)" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="var(--accent-warm)" stopOpacity="0.0" />
             </linearGradient>
 
             {/* Gradient for fill below 50% centerline */}
             <linearGradient id="cool-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.0" />
-              <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="var(--accent-cool)" stopOpacity="0.0" />
+              <stop offset="100%" stopColor="var(--accent-cool)" stopOpacity="0.25" />
             </linearGradient>
 
             {/* Main Stroke Gradient */}
             <linearGradient id="stroke-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#f59e0b" />
-              <stop offset="45%" stopColor="#f59e0b" />
-              <stop offset="55%" stopColor="#38bdf8" />
-              <stop offset="100%" stopColor="#38bdf8" />
+              <stop offset="0%" stopColor="var(--accent-warm)" />
+              <stop offset="45%" stopColor="var(--accent-warm)" />
+              <stop offset="55%" stopColor="var(--accent-cool)" />
+              <stop offset="100%" stopColor="var(--accent-cool)" />
             </linearGradient>
           </defs>
 
@@ -308,7 +308,7 @@ export default function CareerArc() {
             const isActive = activeIdx === idx;
 
             const isWarm = role.leadPct >= 50;
-            const markerColor = isWarm ? '#f59e0b' : '#38bdf8';
+            const markerColor = isWarm ? 'var(--accent-warm)' : 'var(--accent-cool)';
 
             if (role.style === 'ring') {
               return (
