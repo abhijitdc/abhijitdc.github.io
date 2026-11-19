@@ -1377,10 +1377,10 @@ body {
   font-weight: 500;
 }
 .ratio-label-ic {
-  color: #38bdf8;
+  color: var(--accent-cool);
 }
 .ratio-label-lead {
-  color: #f59e0b;
+  color: var(--accent-warm);
 }
 .ratio-track {
   height: 6px;
@@ -1388,15 +1388,16 @@ body {
   border-radius: 3px;
   display: flex;
   overflow: hidden;
-  background-color: #111;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
 }
 .ratio-bar-ic {
-  background-color: #38bdf8;
+  background-color: var(--accent-cool);
   height: 100%;
   transition: width 0.3s ease;
 }
 .ratio-bar-lead {
-  background-color: #f59e0b;
+  background-color: var(--accent-warm);
   height: 100%;
   transition: width 0.3s ease;
 }

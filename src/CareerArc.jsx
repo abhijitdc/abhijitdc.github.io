@@ -55,7 +55,7 @@ export default function CareerArc() {
   // Dimensions & Grid
   const width = 1000;
   const height = 420;
-  const paddingLeft = 65;
+  const paddingLeft = 95;
   const paddingRight = 30;
   const paddingTop = 45;
   const paddingBottom = 45;
