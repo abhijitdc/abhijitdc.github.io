@@ -1095,3 +1095,254 @@ body {
   color: #fff;
   text-decoration: underline;
 }
+
+/* Career Arc Visualization Styling */
+.career-arc-wrapper {
+  margin-top: 50px;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: rgba(30, 30, 30, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+.career-arc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+.career-arc-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+.career-arc-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 650px;
+}
+.career-arc-legend {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: #bbb;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.legend-dot.warm {
+  background-color: #f59e0b;
+}
+.legend-dot.cool {
+  background-color: #38bdf8;
+}
+.legend-ring {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2.5px solid #bbb;
+  background-color: transparent;
+  display: inline-block;
+}
+
+.career-arc-chart-container {
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+  overflow-x: auto; /* Enable horizontal scrolling on small mobile screens */
+  scrollbar-width: thin;
+}
+.career-arc-svg {
+  min-width: 800px; /* Prevent SVG from collapsing entirely on ultra-narrow screens, maintaining readability */
+  height: auto;
+  display: block;
+}
+
+/* Background Geo bands */
+.country-band {
+  fill: rgba(255, 255, 255, 0.012);
+  transition: fill 0.3s ease;
+}
+.country-band.active {
+  fill: rgba(255, 255, 255, 0.035);
+}
+.country-band-divider {
+  stroke: var(--border-color);
+  stroke-dasharray: 4 4;
+  stroke-width: 1;
+}
+.country-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  fill: #666;
+  letter-spacing: 2px;
+  transition: fill 0.3s ease;
+}
+.country-label.active {
+  fill: #aaa;
+}
+
+/* Guidelines */
+.y-grid-line {
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 1;
+}
+.y-grid-line.centerline {
+  stroke: #444;
+  stroke-dasharray: 4 4;
+  stroke-width: 1.2;
+}
+.y-axis-label {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.72rem;
+  fill: var(--text-secondary);
+}
+.x-axis-tick {
+  stroke: var(--border-color);
+  stroke-width: 1.2;
+}
+.x-axis-label {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.72rem;
+  fill: var(--text-secondary);
+}
+
+/* Fill paths */
+.fill-area-top {
+  transition: opacity 0.3s;
+}
+.fill-area-bottom {
+  transition: opacity 0.3s;
+}
+
+/* Markers */
+.role-marker {
+  cursor: pointer;
+  transition: r 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), stroke-width 0.2s;
+}
+.role-marker.solid {
+  stroke: #1e1e1e;
+  stroke-width: 1.5;
+}
+.role-marker.ring {
+  fill: #1a1a1a;
+}
+.role-marker.active {
+  r: 9px;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));
+}
+
+.chart-hit-zone {
+  cursor: pointer;
+  outline: none;
+}
+
+/* Detail Card Info Panel */
+.career-arc-detail-card {
+  background-color: #252526;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  margin-top: 10px;
+}
+.detail-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.detail-role-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #fff;
+}
+.card-icon {
+  color: var(--accent-blue);
+}
+.detail-location-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: #1e1e1e;
+  border: 1px solid var(--border-color);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #ccc;
+  font-weight: 500;
+}
+.detail-timeframe {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+/* Two-tone Progress Split bar */
+.ratio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.ratio-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.ratio-label-ic {
+  color: #38bdf8;
+}
+.ratio-label-lead {
+  color: #f59e0b;
+}
+.ratio-track {
+  height: 6px;
+  width: 100%;
+  border-radius: 3px;
+  display: flex;
+  overflow: hidden;
+  background-color: #111;
+}
+.ratio-bar-ic {
+  background-color: #38bdf8;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+.ratio-bar-lead {
+  background-color: #f59e0b;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.detail-advisory-hint {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: #a78bfa; /* subtle light purple/violet */
+  border-top: 1px dashed rgba(255,255,255,0.06);
+  padding-top: 10px;
+  line-height: 1.4;
+}
