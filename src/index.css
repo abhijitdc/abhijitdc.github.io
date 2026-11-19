@@ -1490,3 +1490,89 @@ body {
   color: #444;
   font-size: 0.8rem;
 }
+
+/* Procedural System Architecture Minimap */
+.architecture-minimap-wrapper {
+  margin-bottom: 25px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: rgba(13, 13, 13, 0.4);
+  padding: 15px;
+  overflow: hidden;
+}
+.minimap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  font-family: 'Geist Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+.minimap-status {
+  color: #4CAF50;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.minimap-canvas-container {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.minimap-canvas-container::-webkit-scrollbar {
+  display: none;
+}
+.minimap-svg {
+  min-width: 650px; /* Preserve aspect ratio and scale on narrow screens */
+  height: auto;
+  display: block;
+}
+
+/* Connection Animated Data Flow */
+@keyframes flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.minimap-flow-line {
+  animation: flow 1.2s linear infinite;
+}
+
+/* Node cards styles */
+.minimap-node-rect {
+  fill: #181818;
+  stroke: var(--border-color);
+  stroke-width: 1.2;
+  transition: stroke 0.2s, fill 0.2s;
+}
+.minimap-node-group:hover .minimap-node-rect {
+  stroke: var(--accent-blue);
+  fill: #1e1e1e;
+  filter: drop-shadow(0 0 3px rgba(0, 122, 204, 0.15));
+}
+
+.minimap-node-label {
+  font-family: 'Geist', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  fill: #fff;
+  user-select: none;
+}
+.minimap-node-group:hover .minimap-node-label {
+  fill: #9cdcfe;
+}
+
+.minimap-node-desc {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.55rem;
+  fill: var(--text-secondary);
+  letter-spacing: -0.2px;
+  user-select: none;
+}

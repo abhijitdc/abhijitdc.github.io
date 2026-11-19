@@ -21,6 +21,7 @@ import { SiGooglecloud, SiTerraform, SiTypescript } from 'react-icons/si';
 import { PROFILE, MEDIUM_POSTS, GITHUB_REPOS } from './data';
 import profileImage from './assets/images/github_avatar.png';
 import CareerArc from './CareerArc';
+import ArchitectureMinimap from './ArchitectureMinimap';
 
 const getFileIcon = (tags = []) => {
   const tagStr = tags.join(' ').toLowerCase();
@@ -465,11 +466,8 @@ blog/
           <div className="detail-card glass-panel animate-slide-up">
             <div className="readme-header-badge">📄 README.md ➔ projects/{activeFile.data.name.toLowerCase().replace(/ /g, '-')}</div>
             
-            {activeFile.data.image && (
-              <div className="detail-hero-image">
-                <img src={`/images/${activeFile.data.image}`} alt={activeFile.title} />
-              </div>
-            )}
+            {/* Procedural SVG System Architecture Minimap instead of static image */}
+            <ArchitectureMinimap file={activeFile} />
             
             <div className="detail-header">
               <h2>{activeFile.data.name}</h2>
@@ -538,11 +536,8 @@ blog/
           <div className="detail-card glass-panel animate-slide-up">
             <div className="readme-header-badge">📄 BLOG_POST.md ➔ blog/{activeFile.title}</div>
             
-            {activeFile.data.image && (
-              <div className="detail-hero-image">
-                <img src={`/images/${activeFile.data.image}`} alt={activeFile.title} />
-              </div>
-            )}
+            {/* Procedural SVG System Architecture Minimap instead of static image */}
+            <ArchitectureMinimap file={activeFile} />
             
             <div className="detail-header">
               <h2>{activeFile.data.title}</h2>
