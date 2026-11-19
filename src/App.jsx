@@ -1,5 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Folder, FolderOpen, FileText, ChevronRight, ChevronDown, Code, Terminal as TerminalIcon, Maximize2, Minimize2, ExternalLink, BookOpen } from 'lucide-react';
+import { 
+  Folder, 
+  FolderOpen, 
+  FileText, 
+  ChevronRight, 
+  ChevronDown, 
+  Code, 
+  Terminal as TerminalIcon, 
+  Maximize2, 
+  Minimize2, 
+  ExternalLink, 
+  BookOpen,
+  X,
+  Search,
+  Puzzle,
+  Files
+} from 'lucide-react';
 import { FaPython, FaReact, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { SiGooglecloud, SiTerraform, SiTypescript } from 'react-icons/si';
 import { PROFILE, MEDIUM_POSTS, GITHUB_REPOS } from './data';
@@ -15,14 +31,127 @@ const getFileIcon = (tags = []) => {
   return <FileText size={14} style={{ color: '#ccc' }}/>;
 };
 
+// Rich, high-signal project specifications focusing on the 'Why', 'How', and 'What'
+const PROJECT_SPECS = {
+  "BigQuery Information Schema Agent": {
+    why: "Provides natural language access to BigQuery's schema definitions and column-level metadata, reducing database exploration and SQL translation bottlenecks for analysts.",
+    how: "User Input ➔ Google ADK ➔ Vertex AI (Session) ➔ BigQuery INFORMATION_SCHEMA ➔ Live Insights",
+    patterns: ["Conversational Schema Discovery", "Secure SQL Generation", "Context-Aware Agent Response"],
+    tech: ["Google ADK", "Vertex AI API", "Python", "Google Cloud BigQuery"]
+  },
+  "BigQuery MCP Agent": {
+    why: "Bridges the gap between autonomous LLMs and corporate databases using the Model Context Protocol (MCP) to supply real-time database context on demand.",
+    how: "LLM Client ➔ MCP Client Tool Call ➔ MCP Server Execution ➔ BigQuery SQL Run ➔ Context Injected",
+    patterns: ["Model Context Protocol (MCP)", "Context-Aware Query Injection", "Secure API Credentials"],
+    tech: ["Python", "MCP SDK", "Google Cloud BigQuery", "FastAPI"]
+  },
+  "Gemini Enterprise ADK Sales Agent": {
+    why: "Secures enterprise data boundaries while enabling sales representatives to interact dynamically with complex CRM and ERP datasets using secure natural language templates.",
+    how: "Sales Representative ➔ Gemini Enterprise Gate ➔ ADK Sales Agent ➔ Enterprise Data Pipeline",
+    patterns: ["Secure Agent-to-Database Delegation", "Dynamic CRM Synchronization", "Enterprise Guardrails"],
+    tech: ["Python", "Vertex AI Agent Engine", "Google ADK", "Enterprise Security"]
+  },
+  "GraphRAG with BigQuery": {
+    why: "Solves standard Vector Search limitations (loss of global relationships) by merging Graph structures with BigQuery Vector storage to extract multi-degree entity insights.",
+    how: "Entity Extraction ➔ Graph Database Node ➔ BigQuery Vector Embeddings ➔ Deep-Context Answer",
+    patterns: ["Graph Retrieval-Augmented Generation", "Multi-hop Knowledge Retrieval", "Graph Schema Modeling"],
+    tech: ["Jupyter Notebook", "BigQuery GraphRAG", "Vector Search Embeddings"]
+  },
+  "LLM RAG React App": {
+    why: "An end-to-end full-stack showcase designed to demonstrate secure, production-grade enterprise RAG deployment using scalable cloud backends.",
+    how: "React App ➔ Firebase Authentication ➔ Flask API Server ➔ Langchain RAG Execution ➔ Vertex AI",
+    patterns: ["End-to-End User Authentication", "Prompt Flow Management", "Enterprise Rate Limiting"],
+    tech: ["TypeScript", "React", "Python", "Flask", "Langchain", "Firebase", "Vertex AI"]
+  },
+  "Nix Harness": {
+    why: "Prevents development-time dependency drift by providing an isolated, highly reproducible nix-shell configuration to run and test AI agent loops safely.",
+    how: "nix-shell Config ➔ Sandboxed Dependencies ➔ Harness Runner ➔ Secure Local Evaluation",
+    patterns: ["Deterministic Development Environment", "Sandboxed Execution Loops", "Reproducible builds"],
+    tech: ["Nix-shell", "Python", "Agent Testing Frameworks", "Sandbox Isolation"]
+  },
+  "Terraform BigQuery Streaming Demo": {
+    why: "Automates the provisioning of low-latency, real-time GCP data pipelines to ensure highly reliable IaC infrastructure deployments with zero manual errors.",
+    how: "Terraform HCL ➔ Google Cloud Provider ➔ Pub/Sub Topic ➔ BigQuery Write Stream Ingestion",
+    patterns: ["Infrastructure as Code (IaC)", "Real-time Ingestion Architectures", "Least Privilege IAM Access"],
+    tech: ["HashiCorp Terraform (HCL)", "Google Pub/Sub", "BigQuery Streaming", "GCP IAM"]
+  },
+  "Vertex AI RAG App": {
+    why: "Demonstrates production-scale RAG architecture leveraging Google Cloud's enterprise-grade search APIs for highly scalable, real-time document retrieval.",
+    how: "User Query ➔ Vertex AI Search ➔ Multi-Document Retrieval ➔ In-Context Gemini Synthesis",
+    patterns: ["Enterprise Vector Search", "Cloud Document Ingestion", "Grounding Checks"],
+    tech: ["Python", "Vertex AI Vector Search", "GCP Cloud Console", "Streamlit"]
+  }
+};
+
+const SKILLS_EXTENSIONS = [
+  {
+    id: "python-ext",
+    name: "Python Platform Development",
+    publisher: "abhijitdc",
+    description: "Advanced system engineering, asynchronous pipelines, robust unit-testing, and database APIs.",
+    rating: "5.0",
+    version: "v3.12.0",
+    icon: <FaPython style={{ color: '#3776AB' }} size={20} />,
+    downloads: "2.4M",
+    installed: true
+  },
+  {
+    id: "gcp-ext",
+    name: "Google Cloud Engineering (GCP)",
+    publisher: "abhijitdc",
+    description: "Enterprise data architecture, BigQuery GraphRAG, Vertex AI ADK, and serverless server management.",
+    rating: "5.0",
+    version: "v5.2.0",
+    icon: <SiGooglecloud style={{ color: '#4285F4' }} size={20} />,
+    downloads: "1.9M",
+    installed: true
+  },
+  {
+    id: "terraform-ext",
+    name: "Terraform IaC (Infrastructure)",
+    publisher: "hashicorp",
+    description: "Multi-service GCP deployments, modular schemas, IAM secure roles, and robust state pipelines.",
+    rating: "4.9",
+    version: "v1.7.0",
+    icon: <SiTerraform style={{ color: '#844FBA' }} size={20} />,
+    downloads: "1.2M",
+    installed: true
+  },
+  {
+    id: "react-ext",
+    name: "React 19 & TypeScript App Suite",
+    publisher: "facebook",
+    description: "High-performance modular UI, responsive IDE styling, dynamic layouts, and type-safe data schemas.",
+    rating: "4.8",
+    version: "v19.2.0",
+    icon: <FaReact style={{ color: '#61DAFB' }} size={20} />,
+    downloads: "3.2M",
+    installed: true
+  }
+];
+
 function App() {
-  const [expandedDirs, setExpandedDirs] = useState({ projects: true, blog: true, skills: false });
-  // Instead of an array of tabs, we just track the currently active file. Default to about.md.
-  const [activeFile, setActiveFile] = useState({ id: 'about.md', type: 'about', title: 'about.md', data: null });
+  const [activeSidebar, setActiveSidebar] = useState('explorer'); // 'explorer' | 'search' | 'extensions'
+  const [expandedDirs, setExpandedDirs] = useState({ projects: true, blog: true });
   
+  // State for tabs
+  const [openTabs, setOpenTabs] = useState([
+    { id: 'about.md', type: 'about', title: 'about.md', data: null }
+  ]);
+  const [activeFileId, setActiveFileId] = useState('about.md');
+
+  // Search query
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Terminal state
   const [terminalOpen, setTerminalOpen] = useState(false);
-  const [terminalHistory, setTerminalHistory] = useState(['abhijit@portfolio:~$ booting kernel...', 'abhijit@portfolio:~$ connected! Type "help" for commands.']);
+  const [terminalHistory, setTerminalHistory] = useState([
+    'abhijit@portfolio:~$ booting kernel...', 
+    'abhijit@portfolio:~$ connected! Type "help" for commands.'
+  ]);
   const [terminalInput, setTerminalInput] = useState('');
+  const [commandHistory, setCommandHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
   const terminalEndRef = useRef(null);
 
   useEffect(() => {
@@ -33,37 +162,165 @@ function App() {
 
   const toggleDir = (dir) => setExpandedDirs(prev => ({ ...prev, [dir]: !prev[dir] }));
 
+  // Dynamic file opener
   const openFile = (id, type, title, data) => {
-    setActiveFile({ id, type, title, data });
+    // Check if tab is already open
+    const isAlreadyOpen = openTabs.some(tab => tab.id === id);
+    if (!isAlreadyOpen) {
+      setOpenTabs(prev => [...prev, { id, type, title, data }]);
+    }
+    setActiveFileId(id);
+  };
+
+  const closeTab = (id, e) => {
+    e.stopPropagation(); // prevent setting active tab while closing
+    
+    // Find index of tab to close
+    const tabIndex = openTabs.findIndex(tab => tab.id === id);
+    if (tabIndex === -1) return;
+
+    const updatedTabs = openTabs.filter(tab => tab.id !== id);
+    setOpenTabs(updatedTabs);
+
+    // If closing the currently active tab
+    if (activeFileId === id) {
+      if (updatedTabs.length > 0) {
+        // Switch to adjacent tab
+        const nextActiveIndex = Math.min(tabIndex, updatedTabs.length - 1);
+        setActiveFileId(updatedTabs[nextActiveIndex].id);
+      } else {
+        // If no tabs remain, open about.md as default
+        setOpenTabs([{ id: 'about.md', type: 'about', title: 'about.md', data: null }]);
+        setActiveFileId('about.md');
+      }
+    }
+  };
+
+  const getActiveFile = () => {
+    return openTabs.find(tab => tab.id === activeFileId);
   };
 
   const handleTerminalCommand = (e) => {
     if (e.key === 'Enter') {
-      const cmd = terminalInput.trim().toLowerCase();
+      const fullCmd = terminalInput.trim();
+      const cmd = fullCmd.toLowerCase();
       let output = '';
+
+      if (fullCmd) {
+        setCommandHistory(prev => [...prev, fullCmd]);
+        setHistoryIndex(-1);
+      }
       
-      switch (cmd) {
-        case 'help': output = 'Available commands: whoami, skills, contact, clear, date'; break;
-        case 'whoami': output = PROFILE.bio; break;
-        case 'skills': output = 'Python, TypeScript, React, Google Cloud, Terraform, BigQuery'; break;
-        case 'contact': output = `GitHub: ${PROFILE.links.github} | LinkedIn: ${PROFILE.links.linkedin}`; break;
-        case 'date': output = new Date().toString(); break;
-        case 'clear': 
-          setTerminalHistory([]); 
-          setTerminalInput(''); 
-          return;
-        case '': return;
-        default: output = `bash: ${cmd}: command not found`;
+      if (cmd.startsWith('cat ')) {
+        const fileParam = fullCmd.substring(4).trim();
+        const fileParamLower = fileParam.toLowerCase();
+
+        if (fileParamLower === 'about.md') {
+          output = PROFILE.bio;
+        } else if (fileParamLower === 'skills.md') {
+          output = `TECHNICAL SKILLS:
+- Languages: Python, SQL, TypeScript, Scala, HCL
+- Cloud Platform: Google Cloud Platform (GCP)
+- Data Engineering: BigQuery, Spark, Pub/Sub, Data Pipelines
+- AI / GenAI: Vertex AI Search, Google ADK, GraphRAG, Vector search, Prompt Engineering
+- Infrastructure: HashiCorp Terraform (IaC)
+- Frontend: React 19, HTML5, CSS3/Tailwind`;
+        } else if (fileParamLower.startsWith('projects/') || fileParamLower.startsWith('blog/')) {
+          const isProject = fileParamLower.startsWith('projects/');
+          const searchName = fileParam.substring(isProject ? 9 : 5).trim();
+          
+          if (isProject) {
+            const foundRepo = GITHUB_REPOS.find(r => r.name.toLowerCase() === searchName.toLowerCase());
+            if (foundRepo) {
+              const spec = PROJECT_SPECS[foundRepo.name];
+              output = `[PROJECT] ${foundRepo.name}
+Why: ${spec ? spec.why : foundRepo.description}
+Architecture: ${spec ? spec.how : 'N/A'}
+Tech Stack: ${spec ? spec.tech.join(', ') : foundRepo.tags.join(', ')}
+Link: ${foundRepo.link}`;
+            } else {
+              output = `cat: projects/${searchName}: No such file or repository`;
+            }
+          } else {
+            const foundPost = MEDIUM_POSTS.find(p => p.title.toLowerCase().includes(searchName.toLowerCase()));
+            if (foundPost) {
+              output = `[BLOG] ${foundPost.title}
+Published: ${new Date(foundPost.date).toLocaleDateString()}
+Excerpt: ${foundPost.excerpt}
+Read Link: ${foundPost.link}`;
+            } else {
+              output = `cat: blog/${searchName}: No such file or blog post`;
+            }
+          }
+        } else {
+          output = `cat: ${fileParam}: No such file. Try: cat about.md, cat skills.md`;
+        }
+      } else {
+        switch (cmd) {
+          case 'help': 
+            output = 'Available commands: whoami, skills, contact, ls, cat <filename>, clear, date'; 
+            break;
+          case 'whoami': 
+            output = PROFILE.bio; 
+            break;
+          case 'skills': 
+            output = 'Languages: Python, SQL, HCL, Scala, TypeScript | Cloud: GCP | Frameworks: React, Spark, Langchain'; 
+            break;
+          case 'contact': 
+            output = `GitHub: ${PROFILE.links.github} | LinkedIn: ${PROFILE.links.linkedin} | Medium: ${PROFILE.links.medium}`; 
+            break;
+          case 'date': 
+            output = new Date().toString(); 
+            break;
+          case 'ls':
+            output = `about.md
+skills.md
+projects/
+  ${GITHUB_REPOS.map(r => r.name).join('\n  ')}
+blog/
+  ${MEDIUM_POSTS.map((p, i) => `blog-${i} ("${p.title.substring(0, 20)}...")`).join('\n  ')}`;
+            break;
+          case 'clear': 
+            setTerminalHistory([]); 
+            setTerminalInput(''); 
+            return;
+          case '': 
+            return;
+          default: 
+            output = `bash: ${cmd}: command not found. Type "help" for a list of commands.`;
+        }
       }
       
       setTerminalHistory(prev => [...prev, `abhijit@portfolio:~$ ${terminalInput}`, output]);
       setTerminalInput('');
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length > 0) {
+        const nextIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
+        setHistoryIndex(nextIndex);
+        setTerminalInput(commandHistory[nextIndex]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (commandHistory.length > 0 && historyIndex !== -1) {
+        const nextIndex = historyIndex + 1;
+        if (nextIndex < commandHistory.length) {
+          setHistoryIndex(nextIndex);
+          setTerminalInput(commandHistory[nextIndex]);
+        } else {
+          setHistoryIndex(-1);
+          setTerminalInput('');
+        }
+      }
     }
   };
 
+  const activeFile = getActiveFile();
+
   const renderActiveContent = () => {
-    // Fallback if somehow activeFile is null, though it shouldn't be.
-    if (!activeFile || activeFile.type === 'about') {
+    if (!activeFile) return null;
+
+    if (activeFile.type === 'about') {
       return (
         <div className="modern-about animate-fade-in">
           <div className="hero-section animate-slide-up">
@@ -92,7 +349,6 @@ function App() {
             </a>
           </div>
 
-          {/* Featured Section */}
           {(() => {
             const featuredItem = MEDIUM_POSTS.find(post => post.title === 'Build a Gemini Agent Harness from Scratch with Nix-Shell Sandbox');
             if (!featuredItem) return null;
@@ -101,7 +357,7 @@ function App() {
                 <h3 className="featured-title">Featured Highlight</h3>
                 <div 
                   className="featured-card glass-panel" 
-                  onClick={() => openFile('featured-blog', 'blog', featuredItem.title, featuredItem)}
+                  onClick={() => openFile('featured-blog', 'blog', 'featured-blog.md', featuredItem)}
                 >
                   {featuredItem.image && (
                     <div className="featured-image">
@@ -125,29 +381,155 @@ function App() {
       );
     }
 
-    if (activeFile.type === 'project' || activeFile.type === 'blog') {
-      const isBlog = activeFile.type === 'blog';
+    if (activeFile.type === 'skills_doc') {
+      return (
+        <div className="modern-detail animate-fade-in" style={{ padding: '60px 40px' }}>
+          <div className="detail-card glass-panel animate-slide-up" style={{ padding: '40px' }}>
+            <div className="readme-header-badge">📄 README.md ➔ skills.md</div>
+            <h2 style={{ fontSize: '2.4rem', color: '#fff', marginBottom: '20px' }}>Technical Capabilities</h2>
+            <p style={{ color: '#aaa', fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '35px' }}>
+              A compiled overview of core engineering capabilities, tools, and technical patterns developed through professional experience.
+            </p>
+
+            <div className="readme-section-title">
+              <Code size={18} style={{ color: 'var(--accent-blue)' }} /> Technical Framework Matrix
+            </div>
+            <div className="readme-specs-grid" style={{ marginBottom: '40px' }}>
+              <div className="spec-item">
+                <div className="spec-label">Languages</div>
+                <div className="spec-value" style={{ color: '#9cdcfe' }}>Python, TypeScript, SQL, Scala, HCL</div>
+              </div>
+              <div className="spec-item">
+                <div className="spec-label">Cloud Systems</div>
+                <div className="spec-value" style={{ color: '#4285F4' }}>Google Cloud Platform (GCP), Vertex AI</div>
+              </div>
+              <div className="spec-item">
+                <div className="spec-label">Data Engineering</div>
+                <div className="spec-value" style={{ color: '#dcb67a' }}>BigQuery, Apache Spark, Pub/Sub, pipelines</div>
+              </div>
+              <div className="spec-item">
+                <div className="spec-label">Artificial Intelligence</div>
+                <div className="spec-value" style={{ color: '#61DAFB' }}>GraphRAG, Google ADK, Vector databases, LLM RAG</div>
+              </div>
+            </div>
+
+            <div className="readme-section-title">
+              <TerminalIcon size={18} style={{ color: 'var(--accent-blue)' }} /> Infrastructure & Architectural Patterns
+            </div>
+            <ul style={{ listStyle: 'none', color: '#bbb', padding: 0 }}>
+              <li style={{ marginBottom: '12px', display: 'flex', gap: '10px' }}>
+                <span style={{ color: 'var(--accent-blue)' }}>➔</span>
+                <span><strong>Infrastructure as Code (IaC):</strong> HashiCorp Terraform modules, secure IAM role delegation, and programmatic stream setup.</span>
+              </li>
+              <li style={{ marginBottom: '12px', display: 'flex', gap: '10px' }}>
+                <span style={{ color: 'var(--accent-blue)' }}>➔</span>
+                <span><strong>AI Integration Architectures:</strong> Secure end-user credential propagation inside custom agent layers, sandboxed nix execution, and semantic search interfaces.</span>
+              </li>
+              <li style={{ marginBottom: '12px', display: 'flex', gap: '10px' }}>
+                <span style={{ color: 'var(--accent-blue)' }}>➔</span>
+                <span><strong>Modern Frontend Stack:</strong> Component encapsulation in React 19, modular custom styling, dynamic lists, and responsive workspace layout.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      );
+    }
+
+    if (activeFile.type === 'project') {
+      const spec = PROJECT_SPECS[activeFile.data.name];
       return (
         <div className="modern-detail animate-fade-in">
           <div className="detail-card glass-panel animate-slide-up">
+            <div className="readme-header-badge">📄 README.md ➔ projects/{activeFile.data.name.toLowerCase().replace(/ /g, '-')}</div>
+            
             {activeFile.data.image && (
               <div className="detail-hero-image">
                 <img src={`/images/${activeFile.data.image}`} alt={activeFile.title} />
               </div>
             )}
+            
             <div className="detail-header">
-              <h2>{activeFile.data.title || activeFile.data.name}</h2>
+              <h2>{activeFile.data.name}</h2>
               <a href={activeFile.data.link} target="_blank" rel="noopener noreferrer" className="action-btn primary-btn">
-                {isBlog ? 'Read Full Article' : 'View Source'} <ExternalLink size={16} />
+                View Source <ExternalLink size={16} />
               </a>
             </div>
             
             <div className="detail-meta">
-              {isBlog ? (
-                <span className="meta-item">📅 Published: {new Date(activeFile.data.date).toLocaleDateString()}</span>
-              ) : (
-                <span className="meta-item">🕒 Updated: {new Date(activeFile.data.updated_at).toLocaleDateString()}</span>
+              <span className="meta-item">🕒 Last Updated: {new Date(activeFile.data.updated_at).toLocaleDateString()}</span>
+            </div>
+
+            <div className="detail-tags">
+              {activeFile.data.tags.map(tag => (
+                <span key={tag} className="modern-tag">
+                  {getFileIcon([tag])} {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Virtual README specification section */}
+            <div className="virtual-readme">
+              <div>
+                <div className="readme-section-title">🚀 Why It Was Built (The Mission)</div>
+                <p className="detail-body">{spec ? spec.why : activeFile.data.description}</p>
+              </div>
+
+              {spec && (
+                <>
+                  <div>
+                    <div className="readme-section-title">⛓️ Architectural Flow (The "How")</div>
+                    <div className="architecture-diagram-container">
+                      {spec.how.split(' ➔ ').map((item, idx, arr) => (
+                        <span key={idx}>
+                          <span className="architecture-box">{item}</span>
+                          {idx < arr.length - 1 && <span className="architecture-arrow"> ➔ </span>}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="readme-section-title">📦 Repository Contents & Core Patterns</div>
+                    <div className="readme-specs-grid">
+                      <div className="spec-item">
+                        <div className="spec-label">Technical Stack</div>
+                        <div className="spec-value">{spec.tech.join(', ')}</div>
+                      </div>
+                      <div className="spec-item">
+                        <div className="spec-label">Key Engineering Patterns</div>
+                        <div className="spec-value">{spec.patterns.join(' | ')}</div>
+                      </div>
+                    </div>
+                  </div>
+                </>
               )}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (activeFile.type === 'blog') {
+      return (
+        <div className="modern-detail animate-fade-in">
+          <div className="detail-card glass-panel animate-slide-up">
+            <div className="readme-header-badge">📄 BLOG_POST.md ➔ blog/{activeFile.title}</div>
+            
+            {activeFile.data.image && (
+              <div className="detail-hero-image">
+                <img src={`/images/${activeFile.data.image}`} alt={activeFile.title} />
+              </div>
+            )}
+            
+            <div className="detail-header">
+              <h2>{activeFile.data.title}</h2>
+              <a href={activeFile.data.link} target="_blank" rel="noopener noreferrer" className="action-btn primary-btn">
+                Read Full Article <ExternalLink size={16} />
+              </a>
+            </div>
+            
+            <div className="detail-meta">
+              <span className="meta-item">📅 Published: {new Date(activeFile.data.date).toLocaleDateString()}</span>
             </div>
 
             <div className="detail-tags">
@@ -158,8 +540,9 @@ function App() {
               ))}
             </div>
             
-            <div className="detail-body">
-              <p>{isBlog ? activeFile.data.excerpt : (activeFile.data.description || 'No description provided.')}</p>
+            <div>
+              <div className="readme-section-title">📝 Article Introduction & Summary</div>
+              <p className="detail-body">{activeFile.data.excerpt}</p>
             </div>
           </div>
         </div>
@@ -167,76 +550,260 @@ function App() {
     }
   };
 
+  // Perform search queries across repositories and blog posts
+  const getSearchResults = () => {
+    if (!searchQuery) return { repos: [], blogs: [] };
+    const query = searchQuery.toLowerCase();
+    
+    const matchedRepos = GITHUB_REPOS.filter(repo => {
+      const spec = PROJECT_SPECS[repo.name] || {};
+      return (
+        repo.name.toLowerCase().includes(query) ||
+        (repo.description && repo.description.toLowerCase().includes(query)) ||
+        (spec.why && spec.why.toLowerCase().includes(query)) ||
+        repo.tags.some(tag => tag.toLowerCase().includes(query))
+      );
+    });
+
+    const matchedBlogs = MEDIUM_POSTS.filter(post => {
+      return (
+        post.title.toLowerCase().includes(query) ||
+        post.excerpt.toLowerCase().includes(query) ||
+        post.tags.some(tag => tag.toLowerCase().includes(query))
+      );
+    });
+
+    return { repos: matchedRepos, blogs: matchedBlogs };
+  };
+
+  const { repos: searchRepos, blogs: searchBlogs } = getSearchResults();
+
   return (
     <div className="ide-layout">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <div className="sidebar-header">
-          <div className="profile-mini">
-            <img src={profileImage} alt={PROFILE.name} className="avatar-mini" />
-            <div>
-              <div className="name">{PROFILE.name}</div>
-            </div>
+      {/* Activity Bar (Far Left Icon Strip) */}
+      <aside className="activity-bar">
+        <div className="activity-icons">
+          <div 
+            className={`activity-icon-btn ${activeSidebar === 'explorer' ? 'active' : ''}`}
+            onClick={() => setActiveSidebar('explorer')}
+            title="Explorer"
+          >
+            <Files size={22} />
+          </div>
+          <div 
+            className={`activity-icon-btn ${activeSidebar === 'search' ? 'active' : ''}`}
+            onClick={() => setActiveSidebar('search')}
+            title="Search"
+          >
+            <Search size={22} />
+          </div>
+          <div 
+            className={`activity-icon-btn ${activeSidebar === 'extensions' ? 'active' : ''}`}
+            onClick={() => setActiveSidebar('extensions')}
+            title="Skills & Extensions"
+          >
+            <Puzzle size={22} />
           </div>
         </div>
-        
-        <div className="sidebar-section">
-          <div className="section-title">EXPLORER</div>
-          <ul className="file-tree">
-            <li className={`tree-node ${activeFile?.id === 'about.md' ? 'active-node' : ''}`} onClick={() => openFile('about.md', 'about', 'about.md', null)}>
-              <FileText size={14} /> about.md
-            </li>
-            
-            {/* Projects Dir */}
-            <li>
-              <div className="tree-dir" onClick={() => toggleDir('projects')}>
-                {expandedDirs.projects ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-                {expandedDirs.projects ? <FolderOpen size={14} style={{color: '#dcb67a'}}/> : <Folder size={14} style={{color: '#dcb67a'}}/>}
-                projects
-              </div>
-              {expandedDirs.projects && (
-                <ul className="tree-children">
-                  {GITHUB_REPOS.map(repo => (
-                    <li key={repo.name} className={`tree-node ${activeFile?.id === repo.name ? 'active-node' : ''}`} onClick={() => openFile(repo.name, 'project', repo.name, repo)} title={repo.name}>
-                      <span className="file-icon-mini">{getFileIcon(repo.tags)}</span> <span className="file-label">{repo.name}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-
-            {/* Blog Dir */}
-            <li>
-              <div className="tree-dir" onClick={() => toggleDir('blog')}>
-                {expandedDirs.blog ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-                {expandedDirs.blog ? <FolderOpen size={14} style={{color: '#dcb67a'}}/> : <Folder size={14} style={{color: '#dcb67a'}}/>}
-                blog
-              </div>
-              {expandedDirs.blog && (
-                <ul className="tree-children">
-                  {MEDIUM_POSTS.map((post, i) => {
-                    const shortName = post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title;
-                    return (
-                      <li key={i} className={`tree-node ${activeFile?.id === `blog-${i}` ? 'active-node' : ''}`} onClick={() => openFile(`blog-${i}`, 'blog', shortName, post)} title={post.title}>
-                        <FileText size={14} style={{color: '#519aba'}}/> <span className="file-label">{shortName}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
-            </li>
-          </ul>
+        <div className="activity-icons">
+          <div className="activity-icon-btn" title="Settings" onClick={() => setTerminalOpen(!terminalOpen)}>
+            <TerminalIcon size={20} />
+          </div>
         </div>
+      </aside>
+
+      {/* Primary Sidebar (Explorer or Search or Extensions) */}
+      <aside className="sidebar">
+        {/* Explorer Panel */}
+        {activeSidebar === 'explorer' && (
+          <>
+            <div className="sidebar-header">
+              <div className="profile-mini">
+                <img src={profileImage} alt={PROFILE.name} className="avatar-mini" />
+                <div>
+                  <div className="name">{PROFILE.name}</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="sidebar-section">
+              <div className="section-title">EXPLORER</div>
+              <ul className="file-tree">
+                <li className={`tree-node ${activeFileId === 'about.md' ? 'active-node' : ''}`} onClick={() => openFile('about.md', 'about', 'about.md', null)}>
+                  <FileText size={14} /> about.md
+                </li>
+
+                <li className={`tree-node ${activeFileId === 'skills.md' ? 'active-node' : ''}`} onClick={() => openFile('skills.md', 'skills_doc', 'skills.md', null)}>
+                  <FileText size={14} style={{ color: '#4CAF50' }} /> skills.md
+                </li>
+                
+                {/* Projects Dir */}
+                <li>
+                  <div className="tree-dir" onClick={() => toggleDir('projects')}>
+                    {expandedDirs.projects ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                    {expandedDirs.projects ? <FolderOpen size={14} style={{color: '#dcb67a'}}/> : <Folder size={14} style={{color: '#dcb67a'}}/>}
+                    projects
+                  </div>
+                  {expandedDirs.projects && (
+                    <ul className="tree-children">
+                      {GITHUB_REPOS.map(repo => (
+                        <li key={repo.name} className={`tree-node ${activeFileId === repo.name ? 'active-node' : ''}`} onClick={() => openFile(repo.name, 'project', repo.name, repo)} title={repo.name}>
+                          <span className="file-icon-mini">{getFileIcon(repo.tags)}</span> <span className="file-label">{repo.name}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+
+                {/* Blog Dir */}
+                <li>
+                  <div className="tree-dir" onClick={() => toggleDir('blog')}>
+                    {expandedDirs.blog ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                    {expandedDirs.blog ? <FolderOpen size={14} style={{color: '#dcb67a'}}/> : <Folder size={14} style={{color: '#dcb67a'}}/>}
+                    blog
+                  </div>
+                  {expandedDirs.blog && (
+                    <ul className="tree-children">
+                      {MEDIUM_POSTS.map((post, i) => {
+                        const shortName = post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title;
+                        const fileId = `blog-${i}`;
+                        return (
+                          <li key={i} className={`tree-node ${activeFileId === fileId ? 'active-node' : ''}`} onClick={() => openFile(fileId, 'blog', shortName, post)} title={post.title}>
+                            <FileText size={14} style={{color: '#519aba'}}/> <span className="file-label">{shortName}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </li>
+              </ul>
+            </div>
+          </>
+        )}
+
+        {/* Search Panel */}
+        {activeSidebar === 'search' && (
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <div className="search-box">
+              <div className="section-title" style={{ paddingLeft: 0, paddingBottom: '8px' }}>SEARCH</div>
+              <div className="search-input-container">
+                <Search size={14} className="search-icon-inside" />
+                <input 
+                  type="text" 
+                  className="search-input" 
+                  placeholder="Search projects, technologies..." 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                />
+              </div>
+            </div>
+            
+            <div className="search-results">
+              {searchQuery === '' ? (
+                <div className="search-no-results">Type above to search keywords, tags, languages, or project descriptions...</div>
+              ) : (searchRepos.length === 0 && searchBlogs.length === 0) ? (
+                <div className="search-no-results">No results found matching "{searchQuery}"</div>
+              ) : (
+                <>
+                  {searchRepos.length > 0 && (
+                    <div className="search-result-group">
+                      <div className="search-result-group-title">Projects ({searchRepos.length})</div>
+                      {searchRepos.map(repo => (
+                        <div 
+                          key={repo.name} 
+                          className="search-result-item"
+                          onClick={() => openFile(repo.name, 'project', repo.name, repo)}
+                        >
+                          <span className="file-icon-mini">{getFileIcon(repo.tags)}</span>
+                          <span className="file-label" style={{ maxWidth: '200px' }}>{repo.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {searchBlogs.length > 0 && (
+                    <div className="search-result-group">
+                      <div className="search-result-group-title">Blog posts ({searchBlogs.length})</div>
+                      {searchBlogs.map((post, i) => {
+                        const idx = MEDIUM_POSTS.indexOf(post);
+                        const shortName = post.title.length > 25 ? post.title.substring(0, 25) + '...' : post.title;
+                        return (
+                          <div 
+                            key={i} 
+                            className="search-result-item"
+                            onClick={() => openFile(`blog-${idx}`, 'blog', shortName, post)}
+                          >
+                            <FileText size={14} style={{ color: '#519aba' }} />
+                            <span className="file-label" style={{ maxWidth: '200px' }}>{shortName}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Extensions Panel */}
+        {activeSidebar === 'extensions' && (
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto' }}>
+            <div style={{ padding: '15px 15px 0' }}>
+              <div className="section-title" style={{ paddingLeft: 0 }}>TECHNICAL EXTENSIONS (SKILLS)</div>
+            </div>
+            <div className="extensions-list">
+              {SKILLS_EXTENSIONS.map(ext => (
+                <div key={ext.id} className="extension-card">
+                  <div className="extension-icon">{ext.icon}</div>
+                  <div className="extension-info">
+                    <div className="extension-name-row">
+                      <div className="extension-name" title={ext.name}>{ext.name}</div>
+                      <div className="extension-badge">Installed</div>
+                    </div>
+                    <div className="extension-publisher">by {ext.publisher}</div>
+                    <div className="extension-desc">{ext.description}</div>
+                    <div className="extension-meta">
+                      <span>⭐ {ext.rating}</span>
+                      <span>⬇️ {ext.downloads}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </aside>
 
       {/* Main Workspace */}
       <main className="workspace">
+        {/* Tab Bar Container (VS Code Tabs) */}
+        <div className="tabs-container">
+          {openTabs.map(tab => (
+            <div 
+              key={tab.id} 
+              className={`tab-item ${activeFileId === tab.id ? 'active' : ''}`}
+              onClick={() => setActiveFileId(tab.id)}
+            >
+              {tab.type === 'about' && <FileText size={14} />}
+              {tab.type === 'skills_doc' && <FileText size={14} style={{ color: '#4CAF50' }} />}
+              {tab.type === 'project' && <span style={{ display: 'inline-flex' }}>{getFileIcon(tab.data.tags)}</span>}
+              {tab.type === 'blog' && <FileText size={14} style={{ color: '#519aba' }} />}
+              <span className="tab-title">{tab.title.length > 15 ? tab.title.substring(0, 15) + '...' : tab.title}</span>
+              <span className="tab-close" onClick={(e) => closeTab(tab.id, e)}>
+                <X size={12} />
+              </span>
+            </div>
+          ))}
+        </div>
+
         {/* Breadcrumb / Title Bar */}
         <div className="title-bar">
           <div className="breadcrumb">
             <span className="crumb">~</span>
             <span className="crumb-separator">/</span>
             {activeFile?.type === 'about' && <span className="crumb active">about.md</span>}
+            {activeFile?.type === 'skills_doc' && <span className="crumb active">skills.md</span>}
             {activeFile?.type === 'project' && (
               <>
                 <span className="crumb">projects</span>
@@ -282,7 +849,7 @@ function App() {
           {terminalOpen && (
             <div className="terminal-body" onClick={() => document.getElementById('term-input').focus()}>
               {terminalHistory.map((line, i) => (
-                <div key={i} className="term-line">{line}</div>
+                <div key={i} className="term-line" style={{ whiteSpace: 'pre-wrap' }}>{line}</div>
               ))}
               <div className="term-input-line">
                 <span className="prompt">abhijit@portfolio:~$</span>
@@ -295,6 +862,7 @@ function App() {
                   autoComplete="off"
                   spellCheck="false"
                 />
+                <span className="cursor"></span>
               </div>
               <div ref={terminalEndRef} />
             </div>
