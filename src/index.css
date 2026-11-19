@@ -17,6 +17,8 @@
   --centerline-color: #666;
   --bg-glass: rgba(255, 255, 255, 0.7);
   --terminal-bg: #f8f9fa;
+  --country-band-fill: rgba(0, 0, 0, 0.012);
+  --country-band-active: rgba(0, 0, 0, 0.035);
 }
 
 .dark-theme {
@@ -38,6 +40,8 @@
   --centerline-color: #444;
   --bg-glass: rgba(30, 30, 30, 0.4);
   --terminal-bg: #0d0d0d;
+  --country-band-fill: rgba(255, 255, 255, 0.012);
+  --country-band-active: rgba(255, 255, 255, 0.035);
 }
 
 * {
@@ -148,7 +152,8 @@ body {
 
 .active-node {
   background-color: var(--active-bg);
-  color: #fff;
+  color: var(--text-primary);
+  font-weight: 500;
 }
 
 .tree-children {
@@ -894,9 +899,9 @@ body {
 }
 .search-input {
   width: 100%;
-  background-color: #1e1e1e;
+  background-color: var(--bg-dark);
   border: 1px solid var(--border-color);
-  color: #fff;
+  color: var(--text-primary);
   padding: 6px 10px 6px 30px;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -961,8 +966,8 @@ body {
 .readme-header-badge {
   display: inline-flex;
   align-items: center;
-  background-color: #2d2d2d;
-  color: #aaa;
+  background-color: var(--bg-dark);
+  color: var(--text-secondary);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -974,7 +979,7 @@ body {
 .readme-section-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 6px;
   margin-bottom: 12px;
@@ -1139,9 +1144,10 @@ body {
   padding: 30px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
-  background: rgba(30, 30, 30, 0.4);
+  background: var(--bg-glass);
   position: relative;
   overflow: hidden;
+  transition: background 0.3s, border-color 0.3s;
 }
 .career-arc-header {
   display: flex;
@@ -1154,7 +1160,7 @@ body {
 .career-arc-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 6px;
   letter-spacing: -0.5px;
 }
@@ -1169,7 +1175,7 @@ body {
   gap: 15px;
   flex-wrap: wrap;
   font-size: 0.8rem;
-  color: #bbb;
+  color: var(--text-secondary);
 }
 .legend-item {
   display: flex;
@@ -1183,16 +1189,16 @@ body {
   display: inline-block;
 }
 .legend-dot.warm {
-  background-color: #f59e0b;
+  background-color: var(--accent-warm);
 }
 .legend-dot.cool {
-  background-color: #38bdf8;
+  background-color: var(--accent-cool);
 }
 .legend-ring {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 2.5px solid #bbb;
+  border: 2.5px solid var(--text-secondary);
   background-color: transparent;
   display: inline-block;
 }
@@ -1212,11 +1218,11 @@ body {
 
 /* Background Geo bands */
 .country-band {
-  fill: rgba(255, 255, 255, 0.012);
+  fill: var(--country-band-fill);
   transition: fill 0.3s ease;
 }
 .country-band.active {
-  fill: rgba(255, 255, 255, 0.035);
+  fill: var(--country-band-active);
 }
 .country-band-divider {
   stroke: var(--border-color);
@@ -1227,21 +1233,21 @@ body {
   font-family: 'Geist Mono', monospace;
   font-size: 0.65rem;
   font-weight: 600;
-  fill: #666;
+  fill: var(--text-secondary);
   letter-spacing: 2px;
   transition: fill 0.3s ease;
 }
 .country-label.active {
-  fill: #aaa;
+  fill: var(--text-primary);
 }
 
 /* Guidelines */
 .y-grid-line {
-  stroke: rgba(255, 255, 255, 0.04);
+  stroke: var(--grid-line-color);
   stroke-width: 1;
 }
 .y-grid-line.centerline {
-  stroke: #444;
+  stroke: var(--centerline-color);
   stroke-dasharray: 4 4;
   stroke-width: 1.2;
 }
@@ -1533,9 +1539,10 @@ body {
   margin-bottom: 25px;
   border-radius: 8px;
   border: 1px solid var(--border-color);
-  background-color: rgba(13, 13, 13, 0.4);
+  background-color: var(--bg-dark);
   padding: 15px;
   overflow: hidden;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 .minimap-header {
   display: flex;
@@ -1584,14 +1591,14 @@ body {
 
 /* Node cards styles */
 .minimap-node-rect {
-  fill: #181818;
+  fill: var(--bg-workspace);
   stroke: var(--border-color);
   stroke-width: 1.2;
   transition: stroke 0.2s, fill 0.2s;
 }
 .minimap-node-group:hover .minimap-node-rect {
   stroke: var(--accent-blue);
-  fill: #1e1e1e;
+  fill: var(--hover-bg);
   filter: drop-shadow(0 0 3px rgba(0, 122, 204, 0.15));
 }
 
@@ -1599,11 +1606,12 @@ body {
   font-family: 'Geist', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
-  fill: #fff;
+  fill: var(--text-primary);
   user-select: none;
+  transition: fill 0.2s;
 }
 .minimap-node-group:hover .minimap-node-label {
-  fill: #9cdcfe;
+  fill: var(--accent-blue);
 }
 
 .minimap-node-desc {
