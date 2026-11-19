@@ -324,39 +324,49 @@ blog/
     if (activeFile.type === 'about') {
       return (
         <div className="modern-about animate-fade-in">
-          <div className="hero-section animate-slide-up">
-            <div className="hero-avatar-container">
-               <img src={profileImage} alt={PROFILE.name} className="hero-avatar" />
+          {/* Top section: Split layout placing the interactive Career Arc first */}
+          <div className="hero-split-layout animate-slide-up">
+            {/* Left Column: Profile Card & Social Links */}
+            <div className="hero-left-card glass-panel">
+              <div className="hero-avatar-container">
+                <img src={profileImage} alt={PROFILE.name} className="hero-avatar" />
+              </div>
+              <div className="hero-identity">
+                <h1 className="hero-name">{PROFILE.name}</h1>
+                <h2 className="hero-title">{PROFILE.title}</h2>
+              </div>
+              <div className="social-links inline">
+                <a href={PROFILE.links.github} target="_blank" rel="noopener noreferrer" className="social-btn github mini" title="GitHub">
+                  <FaGithub size={18} />
+                </a>
+                <a href={PROFILE.links.linkedin} target="_blank" rel="noopener noreferrer" className="social-btn linkedin mini" title="LinkedIn">
+                  <FaLinkedin size={18} />
+                </a>
+                <a href={PROFILE.links.medium} target="_blank" rel="noopener noreferrer" className="social-btn medium mini" title="Medium">
+                  <BookOpen size={18} />
+                </a>
+                <a href={PROFILE.links.twitter} target="_blank" rel="noopener noreferrer" className="social-btn twitter mini" title="Twitter/X">
+                  <FaTwitter size={18} />
+                </a>
+              </div>
             </div>
-            <div className="hero-text">
-               <h1 className="hero-name">{PROFILE.name}</h1>
-               <h2 className="hero-title">{PROFILE.title}</h2>
-               <p className="hero-bio">{PROFILE.bio}</p>
-               <div className="hero-badges">
-                 <span className="hero-badge"><SiGooglecloud style={{ color: '#4285F4' }} size={14} /> GenAI & GCP</span>
-                 <span className="hero-badge"><SiTerraform style={{ color: '#844FBA' }} size={14} /> IaC (Terraform)</span>
-                 <span className="hero-badge"><FaPython style={{ color: '#3776AB' }} size={14} /> Data Engineering</span>
-                 <span className="hero-badge"><Code size={14} style={{ color: '#61DAFB' }} /> Full-Stack RAG</span>
-               </div>
+
+            {/* Right Column: Interactive Career Arc visualization */}
+            <div className="hero-right-visual">
+              <CareerArc />
             </div>
-          </div>
-          
-          <div className="social-links animate-slide-up" style={{ animationDelay: '0.1s' }}>
-            <a href={PROFILE.links.github} target="_blank" rel="noopener noreferrer" className="social-btn github">
-              <FaGithub size={20} /> <span>GitHub</span>
-            </a>
-            <a href={PROFILE.links.linkedin} target="_blank" rel="noopener noreferrer" className="social-btn linkedin">
-              <FaLinkedin size={20} /> <span>LinkedIn</span>
-            </a>
-            <a href={PROFILE.links.medium} target="_blank" rel="noopener noreferrer" className="social-btn medium">
-              <BookOpen size={20} /> <span>Medium</span>
-            </a>
-            <a href={PROFILE.links.twitter} target="_blank" rel="noopener noreferrer" className="social-btn twitter">
-              <FaTwitter size={20} /> <span>Twitter</span>
-            </a>
           </div>
 
-          <CareerArc />
+          {/* Below section: Bio description & competencies */}
+          <div className="hero-bio-section animate-slide-up" style={{ animationDelay: '0.1s' }}>
+            <p className="hero-bio">{PROFILE.bio}</p>
+            <div className="hero-badges">
+              <span className="hero-badge"><SiGooglecloud style={{ color: '#4285F4' }} size={14} /> GenAI & GCP</span>
+              <span className="hero-badge"><SiTerraform style={{ color: '#844FBA' }} size={14} /> IaC (Terraform)</span>
+              <span className="hero-badge"><FaPython style={{ color: '#3776AB' }} size={14} /> Data Engineering</span>
+              <span className="hero-badge"><Code size={14} style={{ color: '#61DAFB' }} /> Full-Stack RAG</span>
+            </div>
+          </div>
 
           {(() => {
             const featuredItem = MEDIUM_POSTS.find(post => post.title === 'Build a Gemini Agent Harness from Scratch with Nix-Shell Sandbox');
