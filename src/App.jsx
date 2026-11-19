@@ -232,7 +232,7 @@ function App() {
 
         if (fileParamLower === 'about.md') {
           output = PROFILE.bio;
-        } else if (fileParamLower === 'skills.md') {
+        } else if (fileParamLower === 'skills.md' || fileParamLower === 'skills-matrix.md') {
           output = `ABHIJIT DATTA CHOWDHURY - CAPABILITIES & SKILLS MATRIX
 ======================================================
 
@@ -290,7 +290,7 @@ Read Link: ${foundPost.link}`;
             }
           }
         } else {
-          output = `cat: ${fileParam}: No such file. Try: cat about.md, cat skills.md`;
+          output = `cat: ${fileParam}: No such file. Try: cat about.md, cat skills-matrix.md`;
         }
       } else {
         switch (cmd) {
@@ -311,7 +311,7 @@ Read Link: ${foundPost.link}`;
             break;
           case 'ls':
             output = `about.md
-skills.md
+skills-matrix.md
 projects/
   ${GITHUB_REPOS.map(r => r.name).join('\n  ')}
 blog/
@@ -416,7 +416,7 @@ blog/
       return (
         <div className="modern-detail animate-fade-in" style={{ padding: '40px' }}>
           <div className="detail-card glass-panel animate-slide-up" style={{ padding: '40px' }}>
-            <div className="readme-header-badge">📄 README.md ➔ skills.md</div>
+            <div className="readme-header-badge">📄 README.md ➔ skills-matrix.md</div>
             <h2 style={{ fontSize: '2.4rem', color: 'var(--text-primary)', marginBottom: '15px' }}>Engineering Capabilities & Skills</h2>
             <p style={{ color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '35px' }}>
               With over 20 years of hands-on experience, my background spans deep technical expertise as an individual contributor, platform architect, and engineering manager. Below is a structured view of my capabilities across key professional pillars.
@@ -723,8 +723,8 @@ blog/
                   <FileText size={14} /> about.md
                 </li>
 
-                <li className={`tree-node ${activeFileId === 'skills.md' ? 'active-node' : ''}`} onClick={() => openFile('skills.md', 'skills_doc', 'skills.md', null)}>
-                  <FileText size={14} style={{ color: '#4CAF50' }} /> skills.md
+                <li className={`tree-node ${activeFileId === 'skills-matrix.md' ? 'active-node' : ''}`} onClick={() => openFile('skills-matrix.md', 'skills_doc', 'skills-matrix.md', null)}>
+                  <FileText size={14} style={{ color: '#4CAF50' }} /> skills-matrix.md
                 </li>
                 
                 {/* Projects Dir */}
@@ -893,7 +893,7 @@ blog/
             <span className="crumb">~</span>
             <span className="crumb-separator">/</span>
             {activeFile?.type === 'about' && <span className="crumb active">about.md</span>}
-            {activeFile?.type === 'skills_doc' && <span className="crumb active">skills.md</span>}
+            {activeFile?.type === 'skills_doc' && <span className="crumb active">skills-matrix.md</span>}
             {activeFile?.type === 'project' && (
               <>
                 <span className="crumb">projects</span>
