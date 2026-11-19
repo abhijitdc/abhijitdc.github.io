@@ -338,37 +338,9 @@ blog/
     if (activeFile.type === 'about') {
       return (
         <div className="modern-about animate-fade-in">
-          {/* Top section: Split layout placing the interactive Career Arc first */}
-          <div className="hero-split-layout animate-slide-up">
-            {/* Left Column: Profile Card & Social Links */}
-            <div className="hero-left-card glass-panel">
-              <div className="hero-avatar-container">
-                <img src={profileImage} alt={PROFILE.name} className="hero-avatar" />
-              </div>
-              <div className="hero-identity">
-                <h1 className="hero-name">{PROFILE.name}</h1>
-                <h2 className="hero-title">{PROFILE.title}</h2>
-              </div>
-              <div className="social-links inline">
-                <a href={PROFILE.links.github} target="_blank" rel="noopener noreferrer" className="social-btn github mini" title="GitHub">
-                  <FaGithub size={18} />
-                </a>
-                <a href={PROFILE.links.linkedin} target="_blank" rel="noopener noreferrer" className="social-btn linkedin mini" title="LinkedIn">
-                  <FaLinkedin size={18} />
-                </a>
-                <a href={PROFILE.links.medium} target="_blank" rel="noopener noreferrer" className="social-btn medium mini" title="Medium">
-                  <BookOpen size={18} />
-                </a>
-                <a href={PROFILE.links.twitter} target="_blank" rel="noopener noreferrer" className="social-btn twitter mini" title="Twitter/X">
-                  <FaTwitter size={18} />
-                </a>
-              </div>
-            </div>
-
-            {/* Right Column: Interactive Career Arc visualization */}
-            <div className="hero-right-visual">
-              <CareerArc />
-            </div>
+          {/* Full-width interactive Career Arc visual taking full precedence */}
+          <div className="hero-full-width-visual animate-slide-up">
+            <CareerArc />
           </div>
 
           {/* Below section: Bio description & competencies */}
@@ -856,6 +828,29 @@ blog/
                 <span className="crumb active">{activeFile.title}</span>
               </>
             )}
+          </div>
+
+          {/* Collaborative IDE Profile Status Badge */}
+          <div className="title-bar-profile">
+            <img src={profileImage} alt={PROFILE.name} className="title-profile-avatar" />
+            <div className="title-profile-info">
+              <span className="title-profile-name">{PROFILE.name}</span>
+              <span className="title-profile-title">{PROFILE.title}</span>
+            </div>
+            <div className="title-profile-socials">
+              <a href={PROFILE.links.github} target="_blank" rel="noopener noreferrer" className="title-social-icon" title="GitHub">
+                <FaGithub size={14} />
+              </a>
+              <a href={PROFILE.links.linkedin} target="_blank" rel="noopener noreferrer" className="title-social-icon" title="LinkedIn">
+                <FaLinkedin size={14} />
+              </a>
+              <a href={PROFILE.links.medium} target="_blank" rel="noopener noreferrer" className="title-social-icon" title="Medium">
+                <BookOpen size={14} />
+              </a>
+              <a href={PROFILE.links.twitter} target="_blank" rel="noopener noreferrer" className="title-social-icon" title="Twitter/X">
+                <FaTwitter size={14} />
+              </a>
+            </div>
           </div>
         </div>
 

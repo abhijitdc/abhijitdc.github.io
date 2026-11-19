@@ -462,7 +462,7 @@ body {
 .detail-header h2 {
   font-size: 2.2rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
   line-height: 1.3;
   margin: 0;
   word-wrap: break-word;
@@ -518,18 +518,18 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
-  background-color: #1e1e1e;
+  background-color: var(--bg-dark);
   border: 1px solid var(--border-color);
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 0.85rem;
-  color: #ddd;
+  color: var(--text-primary);
 }
 
 .detail-body {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: #bbb;
+  color: var(--text-primary);
 }
 
 
@@ -741,7 +741,7 @@ body {
   position: relative;
 }
 .activity-icon-btn:hover {
-  color: #fff;
+  color: var(--text-primary);
 }
 .activity-icon-btn.active {
   color: var(--accent-blue);
@@ -759,7 +759,7 @@ body {
 /* VS Code Tabs Container */
 .tabs-container {
   display: flex;
-  background-color: #252526;
+  background-color: var(--bg-sidebar);
   border-bottom: 1px solid var(--border-color);
   overflow-x: auto;
   height: 35px;
@@ -773,7 +773,7 @@ body {
   align-items: center;
   gap: 8px;
   padding: 0 15px;
-  background-color: #2d2d2d;
+  background-color: var(--bg-dark);
   border-right: 1px solid var(--border-color);
   font-size: 0.8rem;
   color: var(--text-secondary);
@@ -784,12 +784,12 @@ body {
   transition: background-color 0.2s, color 0.2s;
 }
 .tab-item:hover {
-  background-color: #2a2d2e;
-  color: #fff;
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
 }
 .tab-item.active {
   background-color: var(--bg-workspace);
-  color: #fff;
+  color: var(--text-primary);
   border-top-color: var(--accent-blue);
 }
 .tab-close {
@@ -986,9 +986,9 @@ body {
 .architecture-diagram-container {
   font-family: 'Geist Mono', monospace;
   font-size: 0.8rem;
-  color: #9cdcfe;
+  color: var(--accent-blue);
   overflow-x: auto;
-  background-color: #0d0d0d;
+  background-color: var(--terminal-bg);
   padding: 15px;
   border-radius: 6px;
   border: 1px solid var(--border-color);
@@ -1002,11 +1002,14 @@ body {
   border: 1px solid var(--border-color);
   padding: 6px 12px;
   border-radius: 4px;
-  background: #1e1e1e;
-  color: #fff;
+  background: var(--bg-node);
+  color: var(--text-primary);
   display: inline-block;
   white-space: nowrap;
   font-size: 0.78rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.dark-theme .architecture-box {
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 .architecture-arrow {
@@ -1020,7 +1023,7 @@ body {
   margin-top: 10px;
 }
 .spec-item {
-  background-color: #181818;
+  background-color: var(--bg-dark);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 12px;
@@ -1034,7 +1037,7 @@ body {
 }
 .spec-value {
   font-size: 0.82rem;
-  color: #eee;
+  color: var(--text-primary);
   font-weight: 500;
   line-height: 1.4;
 }
@@ -1609,4 +1612,102 @@ body {
   fill: var(--text-secondary);
   letter-spacing: -0.2px;
   user-select: none;
+}
+
+/* Title Bar Profile Status Badge */
+.title-bar-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-left: auto; /* Push to the far right */
+  height: 28px;
+  max-width: 480px;
+  transition: border-color 0.2s;
+  user-select: none;
+}
+.title-bar-profile:hover {
+  border-color: var(--accent-blue);
+}
+
+.title-profile-avatar {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.title-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.title-profile-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.title-profile-title {
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  border-left: 1px solid var(--border-color);
+  padding-left: 6px;
+}
+
+.title-profile-socials {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 1px solid var(--border-color);
+  padding-left: 8px;
+  height: 14px;
+}
+
+.title-social-icon {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, transform 0.15s;
+}
+.title-social-icon:hover {
+  color: var(--accent-blue);
+  transform: scale(1.15);
+}
+
+/* Full Width Career Arc */
+.hero-full-width-visual {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.hero-full-width-visual .career-arc-wrapper {
+  margin-top: 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+.dark-theme .hero-full-width-visual .career-arc-wrapper {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Responsive details for title bar badge */
+@media (max-width: 768px) {
+  .title-profile-title {
+    display: none;
+  }
+  .title-bar-profile {
+    max-width: 250px;
+    gap: 8px;
+  }
+}
+@media (max-width: 576px) {
+  .title-bar-profile {
+    display: none; /* Hide profile entirely in the top title bar on ultra-small viewports to prevent overflow */
+  }
 }
