@@ -193,6 +193,8 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-workspace);
+  min-width: 0; /* Prevents container from stretching horizontally when tabs overflow */
+  overflow: hidden; /* Ensures tab horizontal overflow is self-contained */
 }
 
 /* Title Bar / Breadcrumbs */
