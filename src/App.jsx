@@ -395,8 +395,8 @@ blog/
         <div className="modern-detail animate-fade-in" style={{ padding: '60px 40px' }}>
           <div className="detail-card glass-panel animate-slide-up" style={{ padding: '40px' }}>
             <div className="readme-header-badge">📄 README.md ➔ skills.md</div>
-            <h2 style={{ fontSize: '2.4rem', color: '#fff', marginBottom: '20px' }}>Technical Capabilities</h2>
-            <p style={{ color: '#aaa', fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '35px' }}>
+            <h2 style={{ fontSize: '2.4rem', color: 'var(--text-primary)', marginBottom: '20px' }}>Technical Capabilities</h2>
+            <p style={{ color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '35px' }}>
               A compiled overview of core engineering capabilities, tools, and technical patterns developed through professional experience.
             </p>
 
@@ -406,26 +406,26 @@ blog/
             <div className="readme-specs-grid" style={{ marginBottom: '40px' }}>
               <div className="spec-item">
                 <div className="spec-label">Languages</div>
-                <div className="spec-value" style={{ color: '#9cdcfe' }}>Python, TypeScript, SQL, Scala, HCL</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Python, TypeScript, SQL, Scala, HCL</div>
               </div>
               <div className="spec-item">
                 <div className="spec-label">Cloud Systems</div>
-                <div className="spec-value" style={{ color: '#4285F4' }}>Google Cloud Platform (GCP), Vertex AI</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Google Cloud Platform (GCP), Vertex AI</div>
               </div>
               <div className="spec-item">
                 <div className="spec-label">Data Engineering</div>
-                <div className="spec-value" style={{ color: '#dcb67a' }}>BigQuery, Apache Spark, Pub/Sub, pipelines</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>BigQuery, Apache Spark, Pub/Sub, pipelines</div>
               </div>
               <div className="spec-item">
                 <div className="spec-label">Artificial Intelligence</div>
-                <div className="spec-value" style={{ color: '#61DAFB' }}>GraphRAG, Google ADK, Vector databases, LLM RAG</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>GraphRAG, Google ADK, Vector databases, LLM RAG</div>
               </div>
             </div>
 
             <div className="readme-section-title">
               <TerminalIcon size={18} style={{ color: 'var(--accent-blue)' }} /> Infrastructure & Architectural Patterns
             </div>
-            <ul style={{ listStyle: 'none', color: '#bbb', padding: 0 }}>
+            <ul style={{ listStyle: 'none', color: 'var(--text-primary)', padding: 0 }}>
               <li style={{ marginBottom: '12px', display: 'flex', gap: '10px' }}>
                 <span style={{ color: 'var(--accent-blue)' }}>➔</span>
                 <span><strong>Infrastructure as Code (IaC):</strong> HashiCorp Terraform modules, secure IAM role delegation, and programmatic stream setup.</span>

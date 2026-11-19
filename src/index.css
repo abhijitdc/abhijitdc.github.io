@@ -15,13 +15,16 @@
   --bg-node: #f8fafc;
   --grid-line-color: rgba(0, 0, 0, 0.05);
   --centerline-color: #666;
-  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-glass: rgba(255, 255, 255, 0.94); /* Substantially increased opacity for flawless Light Mode legibility */
   --terminal-bg: #f8f9fa;
   --country-band-fill: rgba(0, 0, 0, 0.012);
   --country-band-active: rgba(0, 0, 0, 0.035);
   --highlight-color: #6d28d9; /* Deep rich purple */
   --highlight-bg: rgba(109, 40, 217, 0.06);
   --highlight-border: rgba(109, 40, 217, 0.15);
+  --badge-color: var(--accent-blue);
+  --badge-bg: rgba(9, 105, 218, 0.06);
+  --badge-border: rgba(9, 105, 218, 0.15);
 }
 
 .dark-theme {
@@ -41,13 +44,16 @@
   --bg-node: #181818;
   --grid-line-color: rgba(255, 255, 255, 0.04);
   --centerline-color: #444;
-  --bg-glass: rgba(30, 30, 30, 0.4);
+  --bg-glass: rgba(28, 28, 30, 0.88); /* Increased opacity for flawless Dark Mode legibility */
   --terminal-bg: #0d0d0d;
   --country-band-fill: rgba(255, 255, 255, 0.012);
   --country-band-active: rgba(255, 255, 255, 0.035);
   --highlight-color: #a78bfa; /* Bright lavender/purple */
   --highlight-bg: rgba(167, 139, 250, 0.08);
   --highlight-border: rgba(167, 139, 250, 0.15);
+  --badge-color: #9cdcfe;
+  --badge-bg: rgba(0, 122, 204, 0.1);
+  --badge-border: rgba(0, 122, 204, 0.3);
 }
 
 * {
@@ -283,7 +289,7 @@ body {
 .hero-bio {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #aaa;
+  color: var(--text-secondary);
   max-width: 600px;
 }
 
@@ -324,7 +330,7 @@ body {
 
 .featured-title {
   font-size: 1.2rem;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 20px;
   font-weight: 600;
   text-transform: uppercase;
@@ -342,6 +348,9 @@ body {
 
 .featured-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.dark-theme .featured-card:hover {
   box-shadow: 0 15px 35px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
@@ -367,13 +376,13 @@ body {
 .featured-content h4 {
   font-size: 1.15rem;
   font-weight: 550;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .featured-content p {
   font-size: 0.95rem;
-  color: #bbb;
+  color: var(--text-secondary);
   margin-bottom: 12px;
   line-height: 1.5;
 }
@@ -828,14 +837,14 @@ body {
 .extension-card {
   display: flex;
   gap: 12px;
-  background-color: #1e1e1e;
+  background-color: var(--bg-dark);
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 12px;
   transition: background-color 0.2s, transform 0.2s;
 }
 .extension-card:hover {
-  background-color: #2a2d2e;
+  background-color: var(--hover-bg);
   transform: translateY(-1px);
 }
 .extension-icon {
@@ -845,7 +854,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #252526;
+  background-color: var(--bg-sidebar);
   border-radius: 6px;
   border: 1px solid var(--border-color);
 }
@@ -862,7 +871,7 @@ body {
 .extension-name {
   font-weight: 600;
   font-size: 0.85rem;
-  color: #fff;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -886,7 +895,7 @@ body {
   color: var(--text-secondary);
 }
 .extension-badge {
-  background-color: #2d2d2d;
+  background-color: var(--active-bg);
   color: #4CAF50;
   padding: 2px 6px;
   border-radius: 4px;
@@ -1034,23 +1043,29 @@ body {
   margin-top: 10px;
 }
 .spec-item {
-  background-color: var(--bg-dark);
+  background-color: var(--bg-node);
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  padding: 12px;
+  padding: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+.dark-theme .spec-item {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .spec-label {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
+  font-size: 0.75rem;
+  color: var(--accent-blue); /* Beautiful blue accent that stands out brilliantly in both modes */
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
 }
 .spec-value {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: var(--text-primary);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 /* Blinking Cursor in Terminal */
@@ -1110,17 +1125,18 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(0, 122, 204, 0.1);
-  border: 1px solid rgba(0, 122, 204, 0.3);
-  color: #9cdcfe;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 550;
   transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 .hero-badge:hover {
-  background-color: rgba(0, 122, 204, 0.2);
+  background-color: var(--hover-bg);
   transform: translateY(-1px);
 }
 
@@ -1499,7 +1515,7 @@ body {
 .hero-bio-section .hero-bio {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #bbb;
+  color: var(--text-primary);
   margin-bottom: 20px;
   max-width: 100%;
 }
