@@ -89,47 +89,47 @@ const PROJECT_SPECS = {
 
 const SKILLS_EXTENSIONS = [
   {
-    id: "python-ext",
-    name: "Python Platform Development",
+    id: "ai-platforms-ext",
+    name: "AI Platforms & Agentic Architectures",
     publisher: "abhijitdc",
-    description: "Advanced system engineering, asynchronous pipelines, robust unit-testing, and database APIs.",
+    description: "Multi-agent workflows, context engineering, evaluation, and inference optimization.",
     rating: "5.0",
-    version: "v3.12.0",
-    icon: <FaPython style={{ color: '#3776AB' }} size={20} />,
-    downloads: "2.4M",
-    installed: true
-  },
-  {
-    id: "gcp-ext",
-    name: "Google Cloud Engineering (GCP)",
-    publisher: "abhijitdc",
-    description: "Enterprise data architecture, BigQuery GraphRAG, Vertex AI ADK, and serverless server management.",
-    rating: "5.0",
-    version: "v5.2.0",
+    version: "v1.0.0",
     icon: <SiGooglecloud style={{ color: '#4285F4' }} size={20} />,
-    downloads: "1.9M",
+    downloads: "Enterprise-ready",
     installed: true
   },
   {
-    id: "terraform-ext",
-    name: "Terraform IaC (Infrastructure)",
-    publisher: "hashicorp",
-    description: "Multi-service GCP deployments, modular schemas, IAM secure roles, and robust state pipelines.",
-    rating: "4.9",
-    version: "v1.7.0",
+    id: "cloud-platforms-ext",
+    name: "Cloud Infrastructure & Platform Eng.",
+    publisher: "abhijitdc",
+    description: "Infrastructure as Code (IaC), GKE, Knative, Cloud Run, Kubernetes (CKA), and GitOps.",
+    rating: "5.0",
+    version: "v1.0.0",
     icon: <SiTerraform style={{ color: '#844FBA' }} size={20} />,
-    downloads: "1.2M",
+    downloads: "Platform-scale",
     installed: true
   },
   {
-    id: "react-ext",
-    name: "React 19 & TypeScript App Suite",
-    publisher: "facebook",
-    description: "High-performance modular UI, responsive IDE styling, dynamic layouts, and type-safe data schemas.",
-    rating: "4.8",
-    version: "v19.2.0",
-    icon: <FaReact style={{ color: '#61DAFB' }} size={20} />,
-    downloads: "3.2M",
+    id: "data-engineering-ext",
+    name: "Data Engineering & Distributed Systems",
+    publisher: "abhijitdc",
+    description: "Greenfield cloud data lakes, distributed telemetry streams, BigQuery, Spark, and Beam.",
+    rating: "5.0",
+    version: "v1.0.0",
+    icon: <FaPython style={{ color: '#3776AB' }} size={20} />,
+    downloads: "Data-scale",
+    installed: true
+  },
+  {
+    id: "leadership-strategy-ext",
+    name: "Engineering Leadership & Strategy",
+    publisher: "abhijitdc",
+    description: "Cross-functional leadership (6-10+ engineers/vendors), technical mentoring, and stakeholder roadmaps.",
+    rating: "5.0",
+    version: "v1.0.0",
+    icon: <Puzzle style={{ color: '#61DAFB' }} size={20} />,
+    downloads: "Leadership",
     installed: true
   }
 ];
@@ -848,11 +848,17 @@ blog/
         {activeSidebar === 'extensions' && (
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto' }}>
             <div style={{ padding: '15px 15px 0' }}>
-              <div className="section-title" style={{ paddingLeft: 0 }}>TECHNICAL EXTENSIONS (SKILLS)</div>
+              <div className="section-title" style={{ paddingLeft: 0 }}>TECHNICAL EXTENSIONS (PILLARS)</div>
             </div>
             <div className="extensions-list">
               {SKILLS_EXTENSIONS.map(ext => (
-                <div key={ext.id} className="extension-card">
+                <div 
+                  key={ext.id} 
+                  className="extension-card" 
+                  style={{ cursor: 'pointer' }} 
+                  onClick={() => openFile('skills-matrix.md', 'skills_doc', 'skills-matrix.md', null)}
+                  title="Click to open the detailed Skills Matrix"
+                >
                   <div className="extension-icon">{ext.icon}</div>
                   <div className="extension-info">
                     <div className="extension-name-row">
