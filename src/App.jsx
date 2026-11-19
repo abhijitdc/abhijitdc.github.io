@@ -233,13 +233,35 @@ function App() {
         if (fileParamLower === 'about.md') {
           output = PROFILE.bio;
         } else if (fileParamLower === 'skills.md') {
-          output = `TECHNICAL SKILLS:
-- Languages: Python, SQL, TypeScript, Scala, HCL
-- Cloud Platform: Google Cloud Platform (GCP)
-- Data Engineering: BigQuery, Spark, Pub/Sub, Data Pipelines
-- AI / GenAI: Vertex AI Search, Google ADK, GraphRAG, Vector search, Prompt Engineering
-- Infrastructure: HashiCorp Terraform (IaC)
-- Frontend: React 19, HTML5, CSS3/Tailwind`;
+          output = `ABHIJIT DATTA CHOWDHURY - CAPABILITIES & SKILLS MATRIX
+======================================================
+
+[PILLAR 1] AI PLATFORMS & AGENTIC ARCHITECTURES
+----------------------------------------------
+- Core: Multi-agent systems, context engineering, evaluation, inference optimization
+- Tech: Vertex AI, Google ADK, LangGraph, Nvidia NeMo, Claude Code, Antigravity, GraphRAG
+
+[PILLAR 2] CLOUD INFRASTRUCTURE & PLATFORM ENGINEERING
+------------------------------------------------------
+- Core: IaC, target-state enterprise architecture, managed PaaS services, chaos engineering
+- Tech: Google Cloud (GCP), AWS, HashiCorp Terraform (HCL), Kubernetes (CKA), Knative, GKE
+
+[PILLAR 3] DATA ENGINEERING & DISTRIBUTED SYSTEMS
+-------------------------------------------------
+- Core: Greenfield cloud data lakes, distributed telemetry streams, MDM lifecycles, ETL
+- Tech: BigQuery, Dataproc, BigTable, Spark, Beam, Pub/Sub, AWS S3/EMR/Redshift, MapR, Hadoop
+
+[PILLAR 4] LEADERSHIP, DELIVERY & PRODUCT STRATEGY
+--------------------------------------------------
+- Core: Cross-functional leadership (6-10+ engineers/vendors), technical mentoring, 
+        roadmaps, partner vendor selection, executive communication, POC design
+- Domains: Banking & Financial Services, Media/Streaming, Enterprise Cloud Platforms
+
+[CERTIFICATIONS]
+----------------
+- Google Cloud Certified: Professional ML Engineer, Data Engineer, & Cloud Architect
+- CKA: Certified Kubernetes Administrator
+- MapR Certified Hadoop Administrator`;
         } else if (fileParamLower.startsWith('projects/') || fileParamLower.startsWith('blog/')) {
           const isProject = fileParamLower.startsWith('projects/');
           const searchName = fileParam.substring(isProject ? 9 : 5).trim();
@@ -279,7 +301,7 @@ Read Link: ${foundPost.link}`;
             output = PROFILE.bio; 
             break;
           case 'skills': 
-            output = 'Languages: Python, SQL, HCL, Scala, TypeScript | Cloud: GCP | Frameworks: React, Spark, Langchain'; 
+            output = 'Pillars: 1. AI & Agentic, 2. Cloud & Platforms, 3. Data & Distributed, 4. Leadership & Strategy | Cloud: GCP, AWS | AI: Google ADK, LangGraph, Vertex AI'; 
             break;
           case 'contact': 
             output = `GitHub: ${PROFILE.links.github} | LinkedIn: ${PROFILE.links.linkedin} | Medium: ${PROFILE.links.medium}`; 
@@ -392,51 +414,109 @@ blog/
 
     if (activeFile.type === 'skills_doc') {
       return (
-        <div className="modern-detail animate-fade-in" style={{ padding: '60px 40px' }}>
+        <div className="modern-detail animate-fade-in" style={{ padding: '40px' }}>
           <div className="detail-card glass-panel animate-slide-up" style={{ padding: '40px' }}>
             <div className="readme-header-badge">📄 README.md ➔ skills.md</div>
-            <h2 style={{ fontSize: '2.4rem', color: 'var(--text-primary)', marginBottom: '20px' }}>Technical Capabilities</h2>
+            <h2 style={{ fontSize: '2.4rem', color: 'var(--text-primary)', marginBottom: '15px' }}>Engineering Capabilities & Skills</h2>
             <p style={{ color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: '1.6', marginBottom: '35px' }}>
-              A compiled overview of core engineering capabilities, tools, and technical patterns developed through professional experience.
+              With over 20 years of hands-on experience, my background spans deep technical expertise as an individual contributor, platform architect, and engineering manager. Below is a structured view of my capabilities across key professional pillars.
             </p>
 
-            <div className="readme-section-title">
-              <Code size={18} style={{ color: 'var(--accent-blue)' }} /> Technical Framework Matrix
+            {/* Pillar 1 */}
+            <div className="readme-section-title" style={{ marginTop: '25px' }}>
+              <Code size={18} style={{ color: 'var(--accent-blue)' }} /> 1. AI Platforms & Agentic Architectures
             </div>
-            <div className="readme-specs-grid" style={{ marginBottom: '40px' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5', marginBottom: '15px' }}>
+              Leading-edge expertise in building multi-agent workflows, model evaluation, and inference optimization frameworks. Currently driving advanced AI platform adoption at Google Cloud for strategic startups and AI-native accounts.
+            </p>
+            <div className="readme-specs-grid" style={{ marginBottom: '30px' }}>
               <div className="spec-item">
-                <div className="spec-label">Languages</div>
-                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Python, TypeScript, SQL, Scala, HCL</div>
+                <div className="spec-label">Core Capabilities</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Multi-agent systems, context engineering, semantic layers, evaluation frameworks, trajectory validation, inference optimization (latency/throughput), open vs. closed model strategy</div>
               </div>
               <div className="spec-item">
-                <div className="spec-label">Cloud Systems</div>
-                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Google Cloud Platform (GCP), Vertex AI</div>
+                <div className="spec-label">Tools & Frameworks</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Vertex AI, Google Agent Development Kit (ADK), LangGraph, Claude Code, Antigravity, Nvidia NeMo & Nemotron, Vector databases, GraphRAG, Prompt engineering</div>
+              </div>
+            </div>
+
+            {/* Pillar 2 */}
+            <div className="readme-section-title">
+              <TerminalIcon size={18} style={{ color: 'var(--accent-blue)' }} /> 2. Cloud Infrastructure & Platform Engineering
+            </div>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5', marginBottom: '15px' }}>
+              Decades of experience architecting highly scalable target-state cloud systems, internal PaaS offerings, managed services, and automated CI/CD and GitOps environments.
+            </p>
+            <div className="readme-specs-grid" style={{ marginBottom: '30px' }}>
+              <div className="spec-item">
+                <div className="spec-label">Core Capabilities</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Infrastructure as Code (IaC), target-state enterprise architecture, managed platform services, chaos engineering, container orchestration, GitOps automation</div>
               </div>
               <div className="spec-item">
-                <div className="spec-label">Data Engineering</div>
-                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>BigQuery, Apache Spark, Pub/Sub, pipelines</div>
+                <div className="spec-label">Tools & Infrastructure</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Google Cloud Platform (GCP), AWS, HashiCorp Terraform (HCL), Kubernetes (CKA), Knative/Cloud Run, GKE, Jenkins BlueOcean, CI/CD pipelines</div>
+              </div>
+            </div>
+
+            {/* Pillar 3 */}
+            <div className="readme-section-title">
+              <BookOpen size={18} style={{ color: 'var(--accent-blue)' }} /> 3. Data Engineering & Distributed Systems
+            </div>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5', marginBottom: '15px' }}>
+              Extensive background designing greenfield AWS/MapR data lakes, distributed real-time telemetry platforms, and Master Data Management (MDM) integrations at enterprise scale.
+            </p>
+            <div className="readme-specs-grid" style={{ marginBottom: '30px' }}>
+              <div className="spec-item">
+                <div className="spec-label">Core Capabilities</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Greenfield cloud data lakes, distributed telemetry streams, MDM lifecycles, data quality guardrails, data modeling, batch & real-time ETL pipelines</div>
               </div>
               <div className="spec-item">
-                <div className="spec-label">Artificial Intelligence</div>
-                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>GraphRAG, Google ADK, Vector databases, LLM RAG</div>
+                <div className="spec-label">Tools & Big Data</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>BigQuery, Dataproc, BigTable, Apache Spark, Apache Beam, Pub/Sub, AWS EMR/Redshift/Athena/Spectrum/Glue, MapR, Hadoop, Redis, Python, Java, Scala, Bash</div>
+              </div>
+            </div>
+
+            {/* Pillar 4 */}
+            <div className="readme-section-title">
+              <Puzzle size={18} style={{ color: 'var(--accent-blue)' }} /> 4. Engineering Leadership, Delivery & Strategy
+            </div>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5', marginBottom: '15px' }}>
+              Proven track record managing cross-functional engineering and operations teams. Skilled in bridging the gap between business strategy, customer feedback, and technical execution.
+            </p>
+            <div className="readme-specs-grid" style={{ marginBottom: '35px' }}>
+              <div className="spec-item">
+                <div className="spec-label">Leadership Capabilities</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Cross-functional engineering leadership, technical mentoring, executive stakeholder management, roadmaps & milestones, partner vendor selection, POC design</div>
+              </div>
+              <div className="spec-item">
+                <div className="spec-label">Industry & Domains</div>
+                <div className="spec-value" style={{ color: 'var(--text-primary)' }}>Banking & Financial Services (National Australia Bank, Amex, JPMorgan Chase, Macquarie Bank), Media/Streaming Products (Kayo Sports), Enterprise Cloud Platforms</div>
               </div>
             </div>
 
             <div className="readme-section-title">
-              <TerminalIcon size={18} style={{ color: 'var(--accent-blue)' }} /> Infrastructure & Architectural Patterns
+              <FileText size={18} style={{ color: 'var(--accent-blue)' }} /> Industry Certifications
             </div>
             <ul style={{ listStyle: 'none', color: 'var(--text-primary)', padding: 0 }}>
-              <li style={{ marginBottom: '12px', display: 'flex', gap: '10px' }}>
-                <span style={{ color: 'var(--accent-blue)' }}>➔</span>
-                <span><strong>Infrastructure as Code (IaC):</strong> HashiCorp Terraform modules, secure IAM role delegation, and programmatic stream setup.</span>
+              <li style={{ marginBottom: '10px', display: 'flex', gap: '10px' }}>
+                <span style={{ color: 'var(--accent-blue)' }}>✔</span>
+                <span>Google Cloud Certified Professional Machine Learning Engineer</span>
               </li>
-              <li style={{ marginBottom: '12px', display: 'flex', gap: '10px' }}>
-                <span style={{ color: 'var(--accent-blue)' }}>➔</span>
-                <span><strong>AI Integration Architectures:</strong> Secure end-user credential propagation inside custom agent layers, sandboxed nix execution, and semantic search interfaces.</span>
+              <li style={{ marginBottom: '10px', display: 'flex', gap: '10px' }}>
+                <span style={{ color: 'var(--accent-blue)' }}>✔</span>
+                <span>Google Cloud Certified Professional Data Engineer</span>
               </li>
-              <li style={{ marginBottom: '12px', display: 'flex', gap: '10px' }}>
-                <span style={{ color: 'var(--accent-blue)' }}>➔</span>
-                <span><strong>Modern Frontend Stack:</strong> Component encapsulation in React 19, modular custom styling, dynamic lists, and responsive workspace layout.</span>
+              <li style={{ marginBottom: '10px', display: 'flex', gap: '10px' }}>
+                <span style={{ color: 'var(--accent-blue)' }}>✔</span>
+                <span>Google Cloud Certified Professional Architect</span>
+              </li>
+              <li style={{ marginBottom: '10px', display: 'flex', gap: '10px' }}>
+                <span style={{ color: 'var(--accent-blue)' }}>✔</span>
+                <span>CKA: Certified Kubernetes Administrator</span>
+              </li>
+              <li style={{ marginBottom: '10px', display: 'flex', gap: '10px' }}>
+                <span style={{ color: 'var(--accent-blue)' }}>✔</span>
+                <span>MapR Certified Hadoop Administrator</span>
               </li>
             </ul>
           </div>
