@@ -331,6 +331,12 @@ blog/
                <h1 className="hero-name">{PROFILE.name}</h1>
                <h2 className="hero-title">{PROFILE.title}</h2>
                <p className="hero-bio">{PROFILE.bio}</p>
+               <div className="hero-badges">
+                 <span className="hero-badge"><SiGooglecloud style={{ color: '#4285F4' }} size={14} /> GenAI & GCP</span>
+                 <span className="hero-badge"><SiTerraform style={{ color: '#844FBA' }} size={14} /> IaC (Terraform)</span>
+                 <span className="hero-badge"><FaPython style={{ color: '#3776AB' }} size={14} /> Data Engineering</span>
+                 <span className="hero-badge"><Code size={14} style={{ color: '#61DAFB' }} /> Full-Stack RAG</span>
+               </div>
             </div>
           </div>
           
@@ -377,6 +383,10 @@ blog/
               </div>
             );
           })()}
+          
+          <div className="about-footer animate-slide-up" style={{ animationDelay: '0.3s' }}>
+            <span>🛠️ Engineered and autonomously maintained via <a href="https://github.com/All-Hands-AI/OpenHands" target="_blank" rel="noopener noreferrer" className="footer-link">OpenHands Software Factory</a></span>
+          </div>
         </div>
       );
     }
@@ -839,6 +849,10 @@ blog/
                   <Code size={14} style={{marginRight: '5px'}}/> main*
                   <span style={{margin: '0 15px', color: '#555'}}>|</span>
                   <span>{PROFILE.title}</span>
+                  <span style={{margin: '0 15px', color: '#555'}}>|</span>
+                  <a href="https://github.com/All-Hands-AI/OpenHands" target="_blank" rel="noopener noreferrer" style={{ color: '#9cdcfe', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' }} title="Maintained by OpenHands Software Factory">
+                    🤖 OpenHands Factory
+                  </a>
                 </>
               )}
             </div>

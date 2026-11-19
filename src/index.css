@@ -1050,3 +1050,48 @@ body {
     height: 3px;
   }
 }
+
+/* Hero Badges (5-second Virtue Signaling) */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(0, 122, 204, 0.1);
+  border: 1px solid rgba(0, 122, 204, 0.3);
+  color: #9cdcfe;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.hero-badge:hover {
+  background-color: rgba(0, 122, 204, 0.2);
+  transform: translateY(-1px);
+}
+
+/* About Footer (OpenHands Attribution) */
+.about-footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.footer-link {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
