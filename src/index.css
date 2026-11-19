@@ -675,3 +675,423 @@ body {
     justify-content: center;
   }
 }
+
+/* Activity Bar styling */
+.activity-bar {
+  width: 50px;
+  background-color: #181818;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  flex-shrink: 0;
+}
+.activity-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+.activity-icon-btn {
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  position: relative;
+}
+.activity-icon-btn:hover {
+  color: #fff;
+}
+.activity-icon-btn.active {
+  color: var(--accent-blue);
+}
+.activity-icon-btn.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background-color: var(--accent-blue);
+}
+
+/* VS Code Tabs Container */
+.tabs-container {
+  display: flex;
+  background-color: #252526;
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+  height: 35px;
+  scrollbar-width: none; /* Hide scrollbar on Firefox */
+}
+.tabs-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar on Chrome/Safari/Webkit */
+}
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 15px;
+  background-color: #2d2d2d;
+  border-right: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  border-top: 2px solid transparent;
+  height: 100%;
+  transition: background-color 0.2s, color 0.2s;
+}
+.tab-item:hover {
+  background-color: #2a2d2e;
+  color: #fff;
+}
+.tab-item.active {
+  background-color: var(--bg-workspace);
+  color: #fff;
+  border-top-color: var(--accent-blue);
+}
+.tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 2px;
+  margin-left: 4px;
+  color: var(--text-secondary);
+  transition: background-color 0.2s, color 0.2s;
+}
+.tab-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Extensions Panel & Skill Cards */
+.extensions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 15px;
+}
+.extension-card {
+  display: flex;
+  gap: 12px;
+  background-color: #1e1e1e;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 12px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+.extension-card:hover {
+  background-color: #2a2d2e;
+  transform: translateY(-1px);
+}
+.extension-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #252526;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+.extension-info {
+  flex: 1;
+  min-width: 0;
+}
+.extension-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+.extension-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.extension-publisher {
+  font-size: 0.75rem;
+  color: var(--accent-blue);
+  margin-bottom: 6px;
+}
+.extension-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.extension-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+.extension-badge {
+  background-color: #2d2d2d;
+  color: #4CAF50;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.7rem;
+}
+
+/* Search Panel & Inputs */
+.search-box {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+.search-input-container {
+  position: relative;
+  width: 100%;
+}
+.search-input {
+  width: 100%;
+  background-color: #1e1e1e;
+  border: 1px solid var(--border-color);
+  color: #fff;
+  padding: 6px 10px 6px 30px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input:focus {
+  border-color: var(--accent-blue);
+}
+.search-icon-inside {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+.search-results {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+.search-result-group {
+  margin-bottom: 15px;
+}
+.search-result-group-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 5px 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 15px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  transition: background-color 0.2s, color 0.2s;
+}
+.search-result-item:hover {
+  background-color: var(--hover-bg);
+  color: #fff;
+}
+.search-no-results {
+  padding: 15px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Virtual README & Specification System */
+.virtual-readme {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 15px;
+}
+.readme-header-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: #2d2d2d;
+  color: #aaa;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: 'Geist Mono', monospace;
+  border: 1px solid var(--border-color);
+  width: fit-content;
+  margin-bottom: 15px;
+}
+.readme-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+}
+.architecture-diagram-container {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.8rem;
+  color: #9cdcfe;
+  overflow-x: auto;
+  background-color: #0d0d0d;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  line-height: 1.6;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.architecture-box {
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: #1e1e1e;
+  color: #fff;
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.architecture-arrow {
+  color: var(--accent-blue);
+  font-weight: bold;
+}
+.readme-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+.spec-item {
+  background-color: #181818;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 12px;
+}
+.spec-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.spec-value {
+  font-size: 0.82rem;
+  color: #eee;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Blinking Cursor in Terminal */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor {
+  display: inline-block;
+  background-color: #cccccc;
+  width: 8px;
+  height: 15px;
+  animation: blink 1s step-end infinite;
+  align-self: center;
+}
+
+/* Mobile Media Query Overrides for Activity Bar */
+@media (max-width: 768px) {
+  .activity-bar {
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    justify-content: space-between;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .activity-icons {
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    width: auto;
+    height: 100%;
+  }
+  .activity-icon-btn {
+    height: 100%;
+    width: 50px;
+  }
+  .activity-icon-btn.active::before {
+    left: 10px;
+    right: 10px;
+    bottom: 0;
+    top: auto;
+    width: auto;
+    height: 3px;
+  }
+}
+
+/* Hero Badges (5-second Virtue Signaling) */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(0, 122, 204, 0.1);
+  border: 1px solid rgba(0, 122, 204, 0.3);
+  color: #9cdcfe;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.hero-badge:hover {
+  background-color: rgba(0, 122, 204, 0.2);
+  transform: translateY(-1px);
+}
+
+/* About Footer (OpenHands Attribution) */
+.about-footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.footer-link {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
